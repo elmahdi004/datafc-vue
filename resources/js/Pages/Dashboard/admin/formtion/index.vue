@@ -10,8 +10,7 @@
                         <span className="relative">Ajouter Formation</span>
                     </Link>
                 </div>
-
-
+                
             </main>
         </AdminLayout>
 </template>

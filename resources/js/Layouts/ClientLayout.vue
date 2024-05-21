@@ -1,7 +1,7 @@
 <template>
     <div>
       <Head :title="title" />
-      <Header :auth="auth"/>
+      <Header/>
       <slot></slot>
       <Footer />
       <ToastContainer
@@ -33,11 +33,8 @@ import {Head} from '@inertiajs/vue3'
   
     const props = defineProps({
       title: String,
-      auth:Object
     },) 
-onMounted(()=>{
-  console.log(props.auth);
-});
+
     //   ToastContainer,
     // setup(props) {
     //   onMounted(() => {

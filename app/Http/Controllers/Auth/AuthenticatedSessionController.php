@@ -34,9 +34,9 @@ class AuthenticatedSessionController extends Controller
         $cred = $request->only(["email","password"]);
         if(Auth::attempt($cred)){
             $request->session()->regenerate();
-             return Inertia::render('accueil/Accueil',['user'=>Auth::user()]);
+            return Inertia::render('accueil/Accueil');
         }
-        return Inertia::render('Auth/Login',['user'=>Auth::user()]);
+        return Inertia::render('Auth/Login',['auth'=>Auth::user()]);
         // return redirect()->intended(RouteServiceProvider::HOME,200,['user'=>Auth::user()]);
     }
 

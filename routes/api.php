@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormationCategorieController;
+use App\Http\Controllers\FormationController;
+use App\Models\FormationCategorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/user',[AuthController::class,'user']);
+Route::get('/categories',[FormationCategorieController::class,'index']);
+Route::post('/formation/create',[FormationController::class,'store']);

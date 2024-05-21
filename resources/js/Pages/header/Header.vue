@@ -190,7 +190,6 @@ import DropdownLink from '@/components/DropdownLink.vue' ;
 const navbarOpen = ref(false);
 const sticky = ref(false);
 const openIndex = ref(-1);
-const props = defineProps(["auth"]);
 
 const menuData = [
     {
@@ -270,6 +269,7 @@ const menuData = [
 ];
 
 // Event handlers
+
 const navbarToggleHandler = () => {
     navbarOpen.value = !navbarOpen.value;
 };

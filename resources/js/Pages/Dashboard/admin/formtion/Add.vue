@@ -2,30 +2,28 @@
     <AdminLayout title="Ajouter une Formation">
         <div class="container mx-auto">
             <div class="w-full p-4">
-                    <div class="relative w-full mb-3">
-                        <InputLabel value="Category" />
-                        <TextInput
-                            type="text"
-                            name="Titre"
-                            :value="dataFormation?.Titre || ''"
-                            @change="
-                                updateDataFormation(
-                                    'Titre',
-                                    $event.target.value
-                                )
-                            "
-                            :class="[
-                                'w-full',
-                                errors?.Titre
-                                    ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500'
-                                    : '',
-                            ]"
-                        />
-                        <InputError :message="errors.Titre" class="mt-2" />
-                    </div>            
+                <div class="relative w-full mb-3">
+                    <InputLabel value="Category" />
+                    <select
+                        id="countries_multiple"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        name="formationCatId"
+                        v-model="formationCatId"
+                    >
+                        <!-- <option selected>Choose a category</option> -->
+                        <option
+                            v-for="(item, index) in categories"
+                            :key="index"
+                            :value="item.id"
+                        >
+                            {{ item.CodeFormation }} : {{ item.Titre }}
+                        </option>
+                    </select>
+                    <InputError :message="errors.Titre" class="mt-2" />
+                </div>
             </div>
             <hr />
-            <div class="flex ">
+            <div class="flex">
                 <div class="w-full lg:w-3/12 px-4">
                     <div class="relative w-full mb-3">
                         <InputLabel value="Code" />
@@ -145,7 +143,7 @@
             <!-- End textarea for Objectif -->
             <div>
                 <hr />
-                <!-- <Addprog /> -->
+                <AddProg />
             </div>
             <PrimaryButton @click="addNewFormation">Ajouter</PrimaryButton>
         </div>
@@ -153,23 +151,33 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import TextInput from "@/components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
+import AddProg from "./Partials/AddProg.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import api from "@/axios.js";
+import { useStore } from "vuex";
 // import AddTypeFormation from "@/Components/AddTypeFormation.vue";
-
+const store = useStore();
 const dataFormation = ref({
     Code: "",
     Titre: "",
     Population_cible: "",
     Duree: "",
     Objectifs: "",
+    formationCatId: 9,
+    programme_formations: store.state.programme,
 });
+const categories = ref([]);
 const errors = ref({});
 const formationCatId = ref(null);
+
+onMounted(() => {
+    api.get("/categories").then(({ data }) => (categories.value = data));
+});
 
 function setFormationcatId(id) {
     formationCatId.value = id;
@@ -180,7 +188,10 @@ function updateDataFormation(key, value) {
 }
 
 function addNewFormation() {
-    // Logic for adding new formation
+    console.log(store.state.programmes);
+    api.post("/formation/create", dataFormation.value)
+        .then((e) => console.log("Done"))
+        .catch((e) => console.log(e));
 }
 </script>
 
