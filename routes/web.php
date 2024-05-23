@@ -111,7 +111,9 @@ foreach ($adminList as $link) {
 }
 
 
-
+Route::get("/admin/formtion/edit/{idf}", function ($idf) {
+    return Inertia::render('Dashboard/admin/formtion/Edit', ['idf' => $idf]);
+});
 
 // Route::post('/login',[AuthController::class,'login'])->name('login');
 

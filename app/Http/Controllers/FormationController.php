@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Formation;
+use App\Models\FormationCategorie;
 
 class FormationController extends Controller
 {
+    public function index(){
+        return FormationCategorie::with('formation')->get();
+    }
     public function store(Request $request){
         $request->validate([
             'Code' => 'required|unique:formations|max:255',
@@ -32,5 +36,11 @@ class FormationController extends Controller
         $data["formation_categories_id"] = $request->formationCatId;
         $formation = Formation::create($data);
        $formation->programmeFormation()->createMany($request->programme_formations);
+    }
+    public function destroy($id){
+            Formation::find($id)->delete();
+    }
+    public function show($id){
+        return Formation::where('id',$id)->with('programmeFormation')->first();
     }
 }

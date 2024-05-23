@@ -32,3 +32,13 @@ Route::post('/info',[InfoController::class,'store'])->name('info.store');
 
 Route::post('/nosclient',[NosClientController::class,'store']);
 
+// formatio apis
+// Route::get('/formations',[FormationController::class,'index']);
+// Route::delete('/formation/{id}',[]);
+
+Route::controller(FormationController::class)->group(function(){
+    Route::get('/formations','index');
+    Route::delete('/formation/{id}','destroy');
+    Route::get('/formation/{id}/program','show');
+});
+
