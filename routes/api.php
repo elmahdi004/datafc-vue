@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\FormationCategorieController;
 use App\Http\Controllers\FormationController;
 use App\Models\FormationCategorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NosClientController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +43,18 @@ Route::controller(FormationController::class)->group(function(){
     Route::get('/formations','index');
     Route::delete('/formation/{id}','destroy');
     Route::get('/formation/{id}/program','show');
+});
+Route::controller(UserController::class)->group(function(){
+    Route::get('/users','index');
+    Route::post('/user/{id}/block','block');
+
+});
+Route::controller(DemandeController::class)->group(function(){
+    Route::get('/demandes','index');
+    // Route::post('/user/{id}/block','block');
+
+});
+Route::controller(MessageController::class)->group(function(){
+    Route::get('/messages','index');
 });
 

@@ -54,7 +54,7 @@ items-center"
                             </td>
                         </tr> */} -->
 
-                        <tr v-for="(item,index) in dataF" :key="index"
+                        <tr v-for="(item,index) in latsetDemandes" :key="index"
                             key={index}
                             className="bg-white border-b dark:bg-primary dark:border-primary/80 hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
@@ -64,31 +64,31 @@ items-center"
                                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center dark:text-white"
                             >
 
-                                f?.demandeable_type
+                            {{item.demandeable_type}}
                             </th>
                             <th
                                 scope="row"
                                 className="px-6 py-4 font-medium text-gray-900 text-center whitespace-nowrap dark:text-white"
                             >
-                                demandeable_type
+                                {{item.demandeable_type}}
                             </th>
                             <td className="px-6 py-4">
-                                f?.formation?.Code
+                                {{item.formation.Code}}
                             </td>
                             <td className="px-6 py-4 text-center">
-                                f?.nbrpers
+                                {{item.nbrpers}}
                             </td>
                             <td className="px- text-center 6 py-4 ">
-                                f?.user?.name
+                                {{item.user.name}}
                             </td>
 
                             <td className="px-6 text-center py-4">
-                                {f?.created_at}
+                                {{item.created_at}}
                             </td>
 
-                            <!-- <td :className={`px-6 py-4 text-center ${!f?.status ? "text-red-700" : "text-primary"}`}>
-                                            {f?.status ? "validé" : "non validé"}
-                            </td> -->
+                            <td :class="['px-6 py-4 text-center', item.status ? 'text-red-700' : 'text-primary']">
+                                    {{item.status ? "validé" : "non validé"}}
+                            </td>
 
                         </tr>
 
@@ -96,7 +96,9 @@ items-center"
             </table>
 </template>
 <script setup>
+import { defineProps } from 'vue';
 const dataF = [{item:""},{item:""}];
+const props = defineProps(["latsetDemandes"]);
 </script>
 <style lang="">
     

@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Request;
 use app\http\Controllers\AuthController;
-
+use App\Models\Demande;
+use App\Models\Formation;
+use App\Models\Message;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,10 +71,10 @@ Route::get("/etude_stratigique", function () {
 
 
 $adminList = [
-    [
-        "path" => "/admin",
-        "element" => "index"
-    ],
+    // [
+    //     "path" => "/admin",
+    //     "element" => "index"
+    // ],
     [
         "path" => "/admin/Demande",
         "element" => "Demande"
@@ -109,7 +112,24 @@ foreach ($adminList as $link) {
         return Inertia::render($com);
     });
 }
+Route::get("/admin", function () {
+    $demandesCount = Demande::count();
+    $formationsCount = Formation::count();
+    $usersCount = User::count();
+    $messagesCount = Message::count();
+    $latsetDemandes = Demande::orderBy('created_at','desc')->with(['formation','user'])->take(5)->get();
+    $latsetMessages = Message::orderBy('created_at','desc')->take(5)->get();
 
+
+    return Inertia::render('Dashboard/admin/index',[
+        'demandesCount'=> $demandesCount,
+        'formationsCount'=> $formationsCount,
+        'usersCount'=> $usersCount,
+        'messagesCount'=> $messagesCount,
+        'latsetDemandes'=>$latsetDemandes,
+        'latsetMessages'=>$latsetMessages
+    ]);
+});
 
 Route::get("/admin/formtion/edit/{idf}", function ($idf) {
     return Inertia::render('Dashboard/admin/formtion/Edit', ['idf' => $idf]);

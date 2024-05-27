@@ -1,53 +1,53 @@
 <template lang="">
     <AdminLayout title="Demande">
-        <div className="w-full h-full">
+        <div class="w-full h-full">
             <div
-                className="relative overflow-x-auto shadow-md  sm:rounded-lg  "
+                class="relative overflow-x-auto shadow-md  sm:rounded-lg  "
             >
                 <div
-                    className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5"
+                    class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5"
                 >
-                    <div className="mb-1 w-full">
-                        <div className="mb-4">
+                    <div class="mb-1 w-full">
+                        <div class="mb-4">
                             <h1
-                                className="text-xl sm:text-2xl font-semibold text-gray-900"
+                                class="text-xl sm:text-2xl font-semibold text-gray-900"
                             >
                                 Tous les Demandes
                             </h1>
                         </div>
-                        <div className="sm:flex">
+                        <div class="sm:flex">
                             <div
-                                className=" sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0"
+                                class=" sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0"
                             >
-                                <div className="lg:pr-3">
+                                <div class="lg:pr-3">
                                     <div
-                                        className="mt-1 relative w-full lg:w-64 xl:w-96 text-gray-600 rounded  flex justify-center items-center"
+                                        class="mt-1 relative w-full lg:w-64 xl:w-96 text-gray-600 rounded  flex justify-center items-center"
                                     >
                                         <TextInput
                                             type="text"
                                             value="query"
                                             @change=""
                                             placeholder="Search"
-                                            className="shadow w-full  sm:text-sm  pe-[40px] py-3 text-sm "
+                                            class="shadow w-full  sm:text-sm  pe-[40px] py-3 text-sm "
                                         />
                                         <i
-                                            className="fa-solid fa-magnifying-glass absolute right-0 top-0 mt-4 mr-4"
+                                            class="fa-solid fa-magnifying-glass absolute right-0 top-0 mt-4 mr-4"
                                         ></i>
                                     </div>
                                 </div>
                                 <div
-                                    className="flex space-x-1 pl-0 sm:pl-2 mt-3 sm:mt-0"
+                                    class="flex space-x-1 pl-0 sm:pl-2 mt-3 sm:mt-0"
                                 >
                                     <!-- {isCheck?.length ? (
                                             <button
                                                 type="button"
                                                 onClick={() => setConfirmationModal(true)}
-                                                className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300  focus:ring-red rounded-lg  py-2 px-2.5 m-1"
+                                                class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300  focus:ring-red rounded-lg  py-2 px-2.5 m-1"
                                                 disabled={!isCheck.length}
                                             >
-                                                <i className="fa-solid fa-trash"></i>
+                                                <i class="fa-solid fa-trash"></i>
                                                 {isCheck.length ? (
-                                                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                                                    <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
                                                         {isCheck?.length}
                                                     </div>
                                                 ) : (
@@ -63,64 +63,86 @@
                     </div>
                 </div>
                 <table
-                    className="w-full  text-sm text-left text-gray-500 dark:text-gray-400"
+                    class="w-full  text-sm text-left text-gray-500 dark:text-gray-400"
                 >
                     <thead
-                        className="text-xs text-primary/80 uppercase bg-gray-50 dark:bg-primary/80 dark:text-gray-400"
+                        class="text-xs text-primary/80 uppercase bg-gray-50 dark:bg-primary/80 dark:text-gray-400"
                     >
-                        <tr>
-                            <th scope="col" className="p-4 ">
-                                <div className="flex items-center ps-4">
+                        <tr class="flex">
+                            <th scope="col" class="p-4 ">
+                                <div class="flex items-center ps-4">
                                     <input
                                         onChange="{handleSelectAll}"
                                         checked="{isCheckAll}"
                                         type="checkbox"
                                         name="selectAll"
                                         id="selectAll"
-                                        className=" accent-primary"
+                                        class=" accent-primary"
                                     />
                                 </div>
                             </th>
-                            <Th_order
-                                order_by="demandeable_type"
-                                name_la="Type"
-                            />
-                            <Th_order
-                                order_by="demandeable_type"
-                                name_la="entreprise / personne"
-                            />
-                            <Th_order
-                                order_by="formation_id"
-                                name_la="Formation"
-                            />
-                            <Th_order
-                                order_by="nbrpers"
-                                name_la="Number Person"
-                            />
-                            <Th_order order_by="user_id" name_la="Client" />
-                            <Th_order order_by="created_at" name_la="Date" />
-                            <Th_order order_by="status" name_la="Status" />
-
                             <th
                                 scope="col"
-                                className="px-6 py-3 flex justify-center"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                Type
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                entreprise / personne
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                Formation
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                Number Person
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                Client
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                Date
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
+                            >
+                                Status
+                            </th>
+                            <th
+                                scope="col"
+                                class="px-6 py-3 flex justify-center"
                             >
                                 ACTION
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr v-if="loading">
-                            <td colSpan="11" className="px-6 py-4">
+                    <tbody v-if="demandes.length > 0">
+                        <!-- <tr v-if="loading">
+                            <td colSpan="11" class="px-6 py-4">
                                 <div
-                                    className="text-left h-[100px] flex
+                                    class="text-left h-[100px] flex
 justify-center
 items-center"
                                 >
                                     <div role="status">
                                         <svg
                                             aria-hidden="true"
-                                            className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary"
+                                            class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary"
                                             viewBox="0 0 100 101"
                                             fill="none"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -134,67 +156,67 @@ items-center"
                                                 fill="currentFill"
                                             />
                                         </svg>
-                                        <span className="sr-only">
+                                        <span class="sr-only">
                                             Loading...
                                         </span>
                                     </div>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr
-                            v-else
-                            key="{index}"
-                            className="bg-white border-b dark:bg-primary dark:border-primary/80 hover:bg-gray-50 dark:hover:bg-gray-600"
+                            v-for="(item, index) in demandes" :key="index"
+                            class="bg-white border-b dark:bg-primary dark:border-primary/80 hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
-                            <td className="w-4 p-4">
-                                <div className="flex items-center ps-4">
+                            <!-- <td class="w-4 p-4">
+                                <div class="flex items-center ps-4">
                                     <input
                                         onChange="{handleClick}"
                                         checked=""
                                         id=""
                                         type="checkbox"
-                                        className=" accent-primary"
+                                        class=" accent-primary"
                                     />
                                 </div>
-                            </td>
+                            </td> -->
                             <th
                                 scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                {f?.demandeable_type ===
+                                {{item.demandeable_type ===
                                 "App\\Models\\PersMorale" ? "Morale" :
-                                "Physique"}
+                                "Physique"}}
                             </th>
                             <th
                                 scope="row"
-                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                {f?.demandeable_type ===
+                                <!-- {{f?.demandeable_type ===
                                 "App\\Models\\PersMorale" ?
-                                f.demandeable.entreprise :
-                                f.demandeable.prenompm}
+                                item.demandeable.entreprise :
+                                item.demandeable.prenompm}} -->
+                                xxxx
                             </th>
-                            <td className="px-6 py-4">
-                                {f?.formation?.Code} / {f?.formation?.Titre}
+                            <td class="px-6 py-4">
+                                {{item.formation.Code}} / {{item.formation.Titre}}
                             </td>
-                            <td className="px-6 py-4 text-center">
-                                {f?.nbrpers}
+                            <td class="px-6 py-4 text-center">
+                                {{item.nbrpers}}
                             </td>
-                            <td className="px-6 py-4 ">{f?.user?.name}</td>
+                            <td class="px-6 py-4 ">{{item.user.name}}</td>
 
-                            <td className="px-6 py-4">{f?.created_at}</td>
+                            <td class="px-6 py-4">{{item.created_at}}</td>
 
                             <td
-                                :className="[
+                                :class="[
                                     'px-6 py-4',
-                                    !f?.status
+                                    !item.status
                                         ? 'text-red-700'
                                         : 'text-primary',
                                 ]"
                             >
-                                {f?.status ? "validé" : "non validé"}
+                                {{item.status ? "validé" : "non validé"}}
                             </td>
-                            <td className="px-6 py-4 flex justify-center  ">
+                            <td class="px-6 py-4 flex justify-center  ">
                                 <InfoDemand data="{f}" action_f="{getData}" />
                             </td>
                         </tr>
@@ -209,5 +231,13 @@ items-center"
 <script setup>
 import TextInput from "@/Components/TextInput.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import api from "@/axios";
+import { onMounted, ref } from "vue";
+const demandes = ref([]);
+onMounted(() => {
+    api.get("/demandes")
+        .then(({ data }) => (demandes.value = data))
+        .catch((e) => console.log(e));
+});
 </script>
 <style lang=""></style>

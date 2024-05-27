@@ -1,9 +1,8 @@
 <template lang="">
-    <Head title="{title}" />
-
-    <div className="w-screen bg-primary/80">
+    <Head :title="title" />
+    <div class="bg-primary/80">
         <div
-            :className="[
+            :class="[
                 `fixed z-39 overflow-hidden ${open ? 'w-56' : 'w-20 '}`,
                 'bg-white h-screen p-[14px] shadow duration-300',
             ]"
@@ -21,7 +20,7 @@
                             d="M9,126.2c-.2,1.1-.4,32.8-.4,70.4V265l120.3-.2,120.2-.4.2-70.2.1-70h-120C20.5,124.2,9.4,124.3,9,126.2Zm112.8,26.5c12,.7,14.9,1.2,16.6,3l2,2.2v24.9l3.3-.4,3.3-.4.2-15.3.2-15.2H210l1.8,3.4c.9,1.9,1.8,3.7,1.8,4.4,0,.5-11.2,1-25,1h-25l.4,7.6c.2,4.2.4,9.3.4,11.2v3.6h49.9l2.5,5c1.6,3.2,2.4,5.6,2.1,7a42.126,42.126,0,0,0-.4,6.2v4.2H200.9V192.6H163.7v39.9H193c18.4,0,29.3.5,29.3,1.2,0,3.4-3.5,3.7-37.4,3.7-34.2,0-35,0-36.3-2.5-1.1-2.2-1.3-4.1-1.3-22.4V192.6h-6.9V234l-2.2,1.9c-1.8,1.5-9.1,1.7-45.8,1.7H48.6l.2-24.1c.2-32.1.3-33.8,2.8-36.9,3.5-4.2,8.5-6.4,15.1-6.4h6.2l.1,28.9.2,29,22.3.4,22.2.2V163.9h-86l1.5-3.2c1.9-3.8,4.3-6.6,6.9-8.1C42.1,151.6,102.2,151.5,121.8,152.7Z"
                             fill="#20787c"
                         />
-                        <g id="Group_1">
+                        <g id="Group_1" v-if="open">
                             <path
                                 id="Path_1"
                                 d="M735.4,122.5c-13.8,2.2-23.6,9-30,20.7-5.2,9.3-6.4,24.5-3.2,37.6,3.8,15.6,14.2,25.2,30.6,28.3,8.5,1.7,20.7-.1,28-4.1,5-2.6,11.7-9.5,14.5-14.5,1.5-2.9,3.5-9.7,3.5-12.1,0-.4-2.5-.6-5.4-.6H768l-2.6,5.7c-5.4,12.2-11.4,16.1-24.4,16-12.7-.2-19.4-4.1-24.4-14.5-7.1-14.5-4.4-36.5,5.5-45.6,6.3-5.7,10.1-7,20.2-7,12.7,0,17.6,2.6,22.7,12.5,2.2,4.1,2.3,4.2,7.8,4.2,6.3,0,6.7-.9,3.7-7.9-3.3-7.5-11.1-14.2-19.6-16.8C752.2,123,739.6,121.8,735.4,122.5Z"
@@ -53,7 +52,7 @@
                                 fill="#20787c"
                             />
                         </g>
-                        <g id="Group_2">
+                        <g id="Group_2" v-if="open">
                             <path
                                 id="Path_8"
                                 d="M567.9,221.5c-5.2,1.2-9,5.4-10.5,11.5-1,4.2-1.1,5.2-.3,9.3,1.8,9.2,7.1,13.2,16.6,12.5,6.7-.5,10.9-3.4,12.3-8.3.9-3.6.8-3.9-1.6-3.9-1.4,0-2.3.7-2.8,2.4-1.7,6.1-10.5,8.5-15.8,4.4-5.9-4.7-5.7-17.8.3-22.3,4.2-3.1,12.4-2.2,14.4,1.6,1.1,1.9,2.4,2.8,3.8,2.7,2.1,0,2.3-.2,1.8-2.4C584.5,223.3,575.8,219.7,567.9,221.5Z"
@@ -165,7 +164,6 @@
                                 fill="#0c0d0d"
                             />
                         </g>
-                        <!-- : ""} -->
                     </g>
                 </svg></Link
             >
@@ -176,7 +174,8 @@
                     :href="Menu.src"
                 >
                     <li
-                        :className="[
+                        :class="[
+                            open ? 'min-w-[200px]' : 'min-w-[50px] flex justify-center',
                             'flex',
                             'rounded',
                             'p-1',
@@ -187,24 +186,22 @@
                             'font-medium',
                             'items-center',
                             'gap-x-4',
-                            Menu.gap ? 'mt-9' : 'mt-2',
-                            !open ? 'justify-center' : 'justify-start',
-                            url === Menu.src
-                                ? 'bg-primary text-white'
-                                : 'text-primary',
+                            'mt-4',
+                            'justify-start',
+                            'text-primary',
                         ]"
                     >
                         <span
-                            :className="
-                                !open ? 'p-1  text-2xl' : 'p-2 text-2xl'
+                            :class="
+                                !open ? 'p-1 text-2xl' : 'p-2 text-2xl'
                             "
                         >
-                            <i :className="Menu.icon"></i>
+                            <i :class="Menu.icon"></i>
                         </span>
                         <span
-                            :className="
-                                !open && 'hidden'
-                                    ? 'origin-left duration-200'
+                            :class="
+                                !open
+                                    ? 'hidden'
                                     : ''
                             "
                         >
@@ -215,18 +212,18 @@
             </ul>
         </div>
         <div
-            :className="[
+            :class="[
                 open ? 'left-56' : 'left-20 ',
                 ' w-screen  absolute  duration-300',
             ]"
             :style="{ width: `calc(100% - ${open ? '14rem' : '5rem'})` }"
         >
             <nav
-                className="sticky shadow z-40 top-0 bg-white w-full  items-center justify-between py-2 text-neutral-500  hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 "
+                class="sticky shadow z-40 top-0 bg-white w-full  items-center justify-between py-2 text-neutral-500  hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 "
             >
-                <div className="flex w-full items-center justify-between px-3">
+                <div class="flex w-full items-center justify-between px-3">
                     <i
-                        :className="[
+                        :class="[
                             'fa-solid',
                             !open2 ? ' fa-bars' : ' fa-chevron-left',
                             'cursor-pointer duration-300',
@@ -273,7 +270,7 @@
                     </div>
                 </div>
             </nav>
-            <div className="p-2 h-screen bg-[#f7f7f7]">
+            <div class="p-2 min-h-screen bg-[#f7f7f7]">
                 <!-- <Banner /> -->
 
                 <slot />
@@ -282,10 +279,11 @@
     </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import NavLink from "@/Layouts/NavLink.vue";
+import { Head,Link } from "@inertiajs/vue3";
 const menus = [
     {
         title: "Dashboard",
@@ -322,13 +320,17 @@ const menus = [
     },
 ];
 const open = ref(false);
+const open2 = ref(true);
+const props = defineProps(["title"]);
 const logout = (e) => {
     e.preventDefault();
     router.post(route("logout"));
-    const toggleOpen = () => {
-        open.value = !open.value;
-    };
 };
+const toggleOpen = () => {
+        open.value = !open.value;
+        open2.value = !open2.value;
+        console.log(open.value);
+    };
 // const  renderTrigger = () => {
 //   return this.page.props.jetstream.managesProfilePhotos ? (
 //     <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">

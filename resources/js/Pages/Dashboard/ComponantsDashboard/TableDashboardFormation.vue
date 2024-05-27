@@ -16,7 +16,7 @@
         </thead>
         <tbody>
          
-                <tr v-for="(item,index) in dataM"
+                <tr v-for="(item,index) in latsetMessages"
                     :key="index"
                     className="border-b  dark:bg-primary text-center dark:border-primary/80 hover:bg-opacity-20 dark:hover:bg-gray-600">
                     <!-- ${!f.read?"bg-primary/40":"bg-gray-200"} -->
@@ -24,25 +24,25 @@
                         scope="row"
                         className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        {f?.full_name }
+                        {{item.full_name }}
                     </th>
                     <th
                         scope="row"
                         className="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                        {f?.email}
+                        {{item.email}}
                     </th>
 
 
 
                     <td className="px-6  py-4">
-                        {f?.object}
+                        {{item.object}}
                     </td>
                     <td className="px-6  py-4 text-center">
-                        {f?.tel}
+                        {{item.tel}}
                     </td>
                     <td className="px-6 py-4 ">
-                        {f?.created_at}
+                        {{item.created_at}}
                     </td>
 
 
@@ -54,7 +54,8 @@
 </template>
 <script setup>
 import Th_order from '@/components/Th_order.vue';
-const dataM = [{item:""},{item:""}];
+import { defineProps } from 'vue';
+const props = defineProps(["latsetMessages"]);
 </script>
 <style lang="">
     

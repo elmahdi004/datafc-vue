@@ -4,12 +4,10 @@
             <div
                 className="mt-2 relative w-full sm:w-8/12 text-gray-600 rounded  flex justify-center items-center"
             >
-                <TextInput
-                    type="text"
-                    :value="query || ''"
-                    @change=""
-                    placeholder="Search"
-                    className="shadow w-full px-5 pe-[40px] py-3 text-sm focus:outline-none"
+                <input
+                    class="w-full border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm"
+                    v-model="filter"
+                    @input="filterUsers"
                 />
                 <i
                     className="fa-solid fa-magnifying-glass absolute right-0 top-0 mt-4 mr-4"
@@ -17,16 +15,13 @@
             </div>
         </div>
         <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4 w-full"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10 w-full mx-4"
         >
             <Card
                 v-for="(user, index) in users"
                 :user="user"
                 :key="index"
             ></Card>
-            <!-- {data?.data?.map((user, i) =>
-                    <Card key={i} user={user} />
-                )} -->
         </div>
 
         <!-- {loading?<></>:<></>}
@@ -37,35 +32,20 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Card from "./components/Card.vue";
-const users = [
-    {
-        profile_photo_url: "",
-        name: "elmahdi bellaziz",
-        is_admin: false,
-        email: "elmahdibellaziz@gmail.com",
-        tel: "23456789",
-    },
-    {
-        profile_photo_url: "",
-        name: "elmahdi bellaziz",
-        is_admin: false,
-        email: "elmahdibellaziz@gmail.com",
-        tel: "23456789",
-    },
-    {
-        profile_photo_url: "",
-        name: "elmahdi bellaziz",
-        is_admin: false,
-        email: "elmahdibellaziz@gmail.com",
-        tel: "23456789",
-    },
-    {
-        profile_photo_url: "",
-        name: "elmahdi bellaziz",
-        is_admin: false,
-        email: "elmahdibellaziz@gmail.com",
-        tel: "23456789",
-    },
-];
+import { onMounted, ref } from "vue";
+import api from "@/axios";
+const users = ref([]);
+const filter = ref("");
+onMounted(() => {
+    api.get("/users")
+        .then(({ data }) => {
+            users.value = data;
+        })
+        .catch((e) => console.log(e));
+});
+const filterUsers = () => {
+    users.value = users.value.filter((ele) => ele.name.includes(filter.value));
+    console.log(users.value);
+};
 </script>
 <style lang=""></style>
