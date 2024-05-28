@@ -19,8 +19,10 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@headlessui/vue": "^1.7.22",
         "@inertiajs/vue3": "^1.0.16",
         "@vitejs/plugin-vue": "^5.0.4",
+        "tw-elements": "^2.0.0",
         "vuex": "^4.0.2"
     }
 }

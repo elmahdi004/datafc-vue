@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/user',[AuthController::class,'user']);
 Route::get('/categories',[FormationCategorieController::class,'index']);
+Route::get('/categorie/{id}',[FormationCategorieController::class,'show']);
 Route::post('/formation/create',[FormationController::class,'store']);
 
 Route::get('/info',[InfoController::class,'info'])->name('info');
@@ -41,6 +42,7 @@ Route::post('/nosclient',[NosClientController::class,'store']);
 
 Route::controller(FormationController::class)->group(function(){
     Route::get('/formations','index');
+    Route::get('/formation/{id}','create');
     Route::delete('/formation/{id}','destroy');
     Route::get('/formation/{id}/program','show');
 });

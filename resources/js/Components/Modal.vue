@@ -11,7 +11,7 @@
                 :class="['p-4 w-full max-h-full',maxWidth]"
                 style="
                     position: absolute;
-                    top: 20px;
+                    top: 100px;
                     right: 50%;
                     transform: translateX(50%);
                 "

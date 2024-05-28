@@ -59,6 +59,9 @@ Route::get('/assistance-conseil-en-recrutement', function () {
 Route::get('/formations-interentreprises', function () {
     return Inertia::render('Formations/Formations');
 });
+Route::get('/info-formation/{idf}', function ($idf) {
+    return Inertia::render('Formations/infoForrmation/FormationInfo', ['idf' => $idf]);
+});
 Route::get('/nos-formations', function () {
     return Inertia::render('nosFormation/NosFormation');
 });

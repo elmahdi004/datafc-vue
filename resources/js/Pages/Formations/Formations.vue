@@ -9,6 +9,7 @@
 </template>
 <script setup>
 import ClientLayout from "../../Layouts/ClientLayout.vue";
+import CardFormation from "./CardFormation.vue";
 </script>
 <style lang="">
     
