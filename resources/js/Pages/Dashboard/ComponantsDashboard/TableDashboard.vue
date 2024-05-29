@@ -64,13 +64,13 @@ items-center"
                                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center dark:text-white"
                             >
 
-                            {{item.demandeable_type}}
+                            {{item.demandeable_type == 'App\\Models\\PersPhysique' ? 'Physique' : 'Moral'}}
                             </th>
                             <th
                                 scope="row"
                                 className="px-6 py-4 font-medium text-gray-900 text-center whitespace-nowrap dark:text-white"
                             >
-                                {{item.demandeable_type}}
+                            {{item.demandeable_type === "App\\Models\\PersMorale" ? item.demandeable.entreprise : item.demandeable.prenompm}}
                             </th>
                             <td className="px-6 py-4">
                                 {{item.formation.Code}}
@@ -86,7 +86,7 @@ items-center"
                                 {{item.created_at}}
                             </td>
 
-                            <td :class="['px-6 py-4 text-center', item.status ? 'text-red-700' : 'text-primary']">
+                            <td :class="['px-6 py-4 text-center', !item.status ? 'text-red-700' : 'text-primary']">
                                     {{item.status ? "validé" : "non validé"}}
                             </td>
 

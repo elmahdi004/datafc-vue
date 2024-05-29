@@ -120,7 +120,7 @@ Route::get("/admin", function () {
     $formationsCount = Formation::count();
     $usersCount = User::count();
     $messagesCount = Message::count();
-    $latsetDemandes = Demande::orderBy('created_at','desc')->with(['formation','user'])->take(5)->get();
+    $latsetDemandes = Demande::orderBy('created_at','desc')->with(['formation','user','demandeable'])->take(5)->get();
     $latsetMessages = Message::orderBy('created_at','desc')->take(5)->get();
 
 

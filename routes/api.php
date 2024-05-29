@@ -26,7 +26,6 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/user',[AuthController::class,'user']);
 Route::get('/categories',[FormationCategorieController::class,'index']);
 Route::get('/categorie/{id}',[FormationCategorieController::class,'show']);
 Route::post('/formation/create',[FormationController::class,'store']);
@@ -39,6 +38,19 @@ Route::post('/nosclient',[NosClientController::class,'store']);
 // formatio apis
 // Route::get('/formations',[FormationController::class,'index']);
 // Route::delete('/formation/{id}',[]);
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/login','login');
+    Route::get('/user','user');
+    Route::get('/logout','logout');
+
+});
+
+Route::middleware(['web'])->group(function () {
+    Route::controller(AuthController::class)->group(function(){
+        Route::post('/login','login');
+        Route::get('/user','user');
+    });
+});
 
 Route::controller(FormationController::class)->group(function(){
     Route::get('/formations','index');

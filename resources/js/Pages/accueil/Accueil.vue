@@ -38,15 +38,11 @@ import Statistics from "./Statistics.vue";
 import FeatureCards from "../FeatureCards/FeatureCards.vue";
 import NosClient from "../NosClient/NosClient.vue";
 import Desc from "../desc/Desc.vue";
-import { defineProps, onMounted } from "vue";
+import { defineProps, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
 const props = defineProps(["auth"]);
 const store = useStore();
-onMounted(() => {
-    axios
-        .get("http://127.0.0.1:403/api/user")
-        .then(({ data }) => console.log(data));
-});
+
 </script>
 <style lang=""></style>

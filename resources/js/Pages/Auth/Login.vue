@@ -7,6 +7,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import api from '@/axios';
+import { reactive, ref } from 'vue';
 
 defineProps({
     canResetPassword: {
@@ -17,16 +19,23 @@ defineProps({
     },
 });
 
-const form = useForm({
+const form = ref({
     email: '',
     password: '',
-    remember: false,
+    // remember:false
 });
-
+const error = ref('');
 const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
+api.post('/login',form.value).then(({data})=>{
+  if(data.error){
+    error.value = data.error;
+  }else{
+    error.value = '';
+    window.location = '/'
+  }
+
+  console.log(data)
+}).catch((e)=>console.log(e))
 };
 </script>
 
@@ -43,27 +52,27 @@ const submit = () => {
     <form @submit.prevent="submit">
       <div className="mb-8">
         <InputLabel htmlFor="email">Email</InputLabel>
-        <TextInput id="email" type="email" className="mt-1 block w-full" v-model="form.email" @change="e => form.setData('email', e.currentTarget.value)" required autoFocus />
-        <InputError className="mt-2" :message="form.errors.email" />
+        <TextInput id="email" type="email" className="mt-1 block w-full" v-model="form.email" required autoFocus />
+        <!-- <InputError className="mt-2" :message="form.errors.email" /> -->
       </div>
 
       <div className="mt-4">
         <InputLabel htmlFor="password">Mot de pass</InputLabel>
-        <TextInput id="password" type="password" className="mt-1 block w-full" v-model="form.password" @change="e => form.setData('password', e.currentTarget.value)" required autoComplete="current-password" />
-        <InputError className="mt-2" :message="form.errors.password" />
+        <TextInput id="password" type="password" className="mt-1 block w-full" v-model="form.password"  required autoComplete="current-password" />
+        <!-- <InputError className="mt-2" :message="form.errors.password" /> -->
       </div>
 
 
 
       <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 mt-4">
-        <div className="">
+        <!-- <div className="">
           <label className="flex items-center">
             <Checkbox name="remember" :checked="form.data.remember === 'on'" @change="e => form.setData('remember', e.currentTarget.checked ? 'on' : '')" />
             <span className="ml-2 text-sm text-gray-600 ">
               Gardez-moi connecté
             </span>
           </label>
-        </div>
+        </div> -->
         <div v-if="canResetPassword">
 
           <Link :href="route('password.request')" className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-chill-500 dark:focus:ring-offset-primary">
@@ -84,6 +93,7 @@ const submit = () => {
           Tu n'as pas de compteS'inscrire
         </Link>
       </div>
+              <InputError v-if="error" className="mt-2" :message="error" />
     </form>
   </AuthenticationCard>
 </template>

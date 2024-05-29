@@ -6,10 +6,9 @@
         ]"
     >
         <div class="flex items-center p-4 h-16">
-            <img
-                src="images/bg-data-fc.png"
-                class="h-14 w-14 py-4 flex-none rounded-full border-2"
-            />
+            <div
+                class="h-14 w-14 py-4 flex items-center justify-center text-primary rounded-full border-2 bg-[#e1fdff]"
+            >{{ user.name.slice(0,2) }}</div>
             <div class="ml-4 flex-auto">
                 <div class="font-medium">
                     {{ user.name }}

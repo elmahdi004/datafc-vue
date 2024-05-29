@@ -68,8 +68,8 @@
                     <thead
                         class="text-xs text-primary/80 uppercase bg-gray-50 dark:bg-primary/80 dark:text-gray-400"
                     >
-                        <tr class="flex">
-                            <th scope="col" class="p-4 ">
+                        <tr class="grid grid-cols-12">
+                            <th scope="col" class="col-span-1 p-4 ">
                                 <div class="flex items-center ps-4">
                                     <input
                                         onChange="{handleSelectAll}"
@@ -83,49 +83,49 @@
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-1 px-6 py-3 flex justify-center"
                             >
                                 Type
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-1 px-6 py-3 flex justify-center"
                             >
                                 entreprise / personne
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-3 px-6 py-3 flex justify-center"
                             >
                                 Formation
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-1 px-6 py-3 flex justify-center"
                             >
                                 Number Person
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-1 px-6 py-3 flex justify-center"
                             >
                                 Client
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-1 px-6 py-3 flex justify-center"
                             >
                                 Date
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-1 px-6 py-3 flex justify-center"
                             >
                                 Status
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 flex justify-center"
+                                class="col-span-2 px-6 py-3 flex justify-center"
                             >
                                 ACTION
                             </th>
@@ -165,9 +165,9 @@ items-center"
                         </tr> -->
                         <tr
                             v-for="(item, index) in demandes" :key="index"
-                            class="bg-white border-b dark:bg-primary dark:border-primary/80 hover:bg-gray-50 dark:hover:bg-gray-600"
+                            class="bg-white grid  grid-cols-12 border-b dark:bg-primary dark:border-primary/80 hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
-                            <!-- <td class="w-4 p-4">
+                            <td class="w-4 p-4 col-span-1">
                                 <div class="flex items-center ps-4">
                                     <input
                                         onChange="{handleClick}"
@@ -177,38 +177,35 @@ items-center"
                                         class=" accent-primary"
                                     />
                                 </div>
-                            </td> -->
-                            <th
+                            </td>
+                            <td
                                 scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                class=" col-span-1 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
                                 {{item.demandeable_type ===
                                 "App\\Models\\PersMorale" ? "Morale" :
                                 "Physique"}}
-                            </th>
-                            <th
+                            </td>
+                            <td
                                 scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                class="col-span-1 px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                <!-- {{f?.demandeable_type ===
-                                "App\\Models\\PersMorale" ?
-                                item.demandeable.entreprise :
-                                item.demandeable.prenompm}} -->
-                                xxxx
-                            </th>
-                            <td class="px-6 py-4">
+                            {{item.demandeable_type === 'App\\Models\\PersMorale' ? item.demandeable.entreprise : item.demandeable.prenompm}}
+
+                                </td>
+                            <td class="col-span-3 px-6 py-4">
                                 {{item.formation.Code}} / {{item.formation.Titre}}
                             </td>
-                            <td class="px-6 py-4 text-center">
+                            <td class="col-span-1 px-6 py-4 text-center">
                                 {{item.nbrpers}}
                             </td>
-                            <td class="px-6 py-4 ">{{item.user.name}}</td>
+                            <td class="col-span-1 px-6 py-4 ">{{item.user.name}}</td>
 
-                            <td class="px-6 py-4">{{item.created_at}}</td>
+                            <td class="col-span-1 px-6 py-4">{{item.created_at}}</td>
 
                             <td
                                 :class="[
-                                    'px-6 py-4',
+                                    'col-span-1 px-6 py-4',
                                     !item.status
                                         ? 'text-red-700'
                                         : 'text-primary',
@@ -216,7 +213,7 @@ items-center"
                             >
                                 {{item.status ? "validé" : "non validé"}}
                             </td>
-                            <td class="px-6 py-4 flex justify-center  ">
+                            <td class="col-span-2 px-6 py-4 flex justify-center  ">
                                 <InfoDemand data="{f}" action_f="{getData}" />
                             </td>
                         </tr>

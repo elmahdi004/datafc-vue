@@ -29,6 +29,8 @@ import api from "@/axios";
 const formations = ref([]);
 
 onMounted(async () => {
+    await api.get('/user').then(({data})=>console.log(data)).catch((e) => console.log(e));
+
     await api
         .get("/formations")
         .then(({ data }) => (formations.value = data))

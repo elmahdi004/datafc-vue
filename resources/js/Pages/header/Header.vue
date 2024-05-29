@@ -160,11 +160,11 @@
                                     class="border-t border-gray-200 dark:border-gray-600"
                                 ></div>
                                 <!-- Authentication -->
-                                <form @submit.prevent="logout">
+                                <div @click="logout">
                                     <DropdownLink as="button"
                                         >Se déconnecter</DropdownLink
                                     >
-                                </form>
+                                </div>
                             </Dropdown>
                         </div>
                     </div>                      </div>
@@ -181,6 +181,9 @@ import { ref, reactive, watchEffect, defineProps,onMounted } from "vue";
 import { Link } from "@inertiajs/vue3";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from '@/components/DropdownLink.vue' ;
+import { useStore } from 'vuex';
+import api from "@/axios";
+
 //   import { useRoute } from '@inertiajs/vue3';
 
 //   const route = useRoute();
@@ -190,7 +193,23 @@ import DropdownLink from '@/components/DropdownLink.vue' ;
 const navbarOpen = ref(false);
 const sticky = ref(false);
 const openIndex = ref(-1);
-
+const store = useStore();
+const auth = ref(null);
+onMounted(async () => {
+    await store.dispatch('fetchUser');
+    auth.value = store.state.auth;
+    console.log('My User is : ',store.state.auth);
+    console.log(auth.value);
+});
+const logout =  ()=>{
+     api.get('/logout').then(({data})=>{
+        console.log('My Data',data);
+        console.log("Done !");
+        auth.value = null;
+        store.state.auth = null;
+        // window.location = '/';
+    });
+}
 const menuData = [
     {
         id: 1,

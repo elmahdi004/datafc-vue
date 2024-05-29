@@ -189,6 +189,7 @@
                             'mt-4',
                             'justify-start',
                             'text-primary',
+                            isActive(Menu.src) ? 'active' : ''
                         ]"
                     >
                         <span
@@ -283,7 +284,7 @@ import { ref, defineProps } from "vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import NavLink from "@/Layouts/NavLink.vue";
-import { Head,Link } from "@inertiajs/vue3";
+import { Head,Link,usePage } from "@inertiajs/vue3";
 const menus = [
     {
         title: "Dashboard",
@@ -319,6 +320,14 @@ const menus = [
         icon: "fa-regular fa-envelope",
     },
 ];
+
+const page = usePage();
+
+const isActive = (routeName) => {
+  return page.url == routeName;
+};
+
+
 const open = ref(false);
 const open2 = ref(true);
 const props = defineProps(["title"]);
@@ -348,4 +357,9 @@ const toggleOpen = () => {
 //   );
 // },
 </script>
-<style lang=""></style>
+<style scoped>
+.active{
+    background-color: #238a91 ;
+    color: white;
+}
+</style>

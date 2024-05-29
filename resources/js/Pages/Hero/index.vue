@@ -98,10 +98,8 @@ clients, en mettant notre expertise à leur service.
 
       </section>
 </template>
-<script>
-export default {
-    
-}
+<script setup>
+
 </script>
 <style lang="">
     
