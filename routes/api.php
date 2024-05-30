@@ -38,17 +38,18 @@ Route::post('/nosclient',[NosClientController::class,'store']);
 // formatio apis
 // Route::get('/formations',[FormationController::class,'index']);
 // Route::delete('/formation/{id}',[]);
-Route::controller(AuthController::class)->group(function(){
-    Route::post('/login','login');
-    Route::get('/user','user');
-    Route::get('/logout','logout');
+// Route::controller(AuthController::class)->group(function(){
+//     Route::post('/login','login');
+//     Route::get('/user','user');
+//     Route::get('/logout','logout');
 
-});
+// });
 
 Route::middleware(['web'])->group(function () {
     Route::controller(AuthController::class)->group(function(){
         Route::post('/login','login');
         Route::get('/user','user');
+        Route::get('/logout','logout');
     });
 });
 

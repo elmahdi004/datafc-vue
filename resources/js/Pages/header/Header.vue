@@ -138,7 +138,7 @@
                             <Dropdown
                                 :align="'right'"
                                 :width="48"
-                                :renderTrigger="renderTrigger"
+                                :renderTrigger="auth"
                             >
                                 <!-- Account Management -->
                                 <div

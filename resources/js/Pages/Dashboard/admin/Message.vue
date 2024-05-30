@@ -19,9 +19,11 @@
                 <div class="flex flex-col h-full overflow-y-auto">
                     <ul class="" v-if="messages.length > 0">
                         <ClinetBox
+                            @setAsActiveMsg="handleSetAsActiveMag"
                             v-for="(item, index) in messages"
                             :key="index"
                             :message="item"
+                            :activeMsgId="msg != null ? msg.id : 0"
                         />
                     </ul>
                 </div>
@@ -63,32 +65,20 @@
                     <div
                         className="relative text-sm  w-10/12 me-auto bg-white border-gray-400 border-2 py-2 px-4 shadow rounded-3xl rounded-bl-sm mb-4"
                     >
-                        <h1 className="font-bold text-2xl">{mess.object}</h1>
+                        <h1 className="font-bold text-2xl">{{msg.object}}</h1>
                         <article
                             className="mt-8 text-gray-500 leading-7 tracking-wider"
                         >
                             <!-- <HTMLRenderer html={mess.msg} /> -->
+                            {{msg.msg}}
                         </article>
                         <div
                             className="text-sm opacity-60 drop-shadow text-center"
                         >
-                            {mess.created_at}
+                            {{msg.created_at}}
                         </div>
                     </div>
-                    <div className='relative w-10/12 ms-auto text-sm bg-white py-2 px-4 shadow  border-2 rounded-3xl rounded-br-none mb-4 border-primary'>
-            <h1 className="font-bold text-2xl">{repley?.object}</h1>
-            <article className="mt-8 text-gray-500 leading-7 tracking-wider">
-                <!-- <HTMLRenderer html={repley?.msg} /> -->
-            </article>
-            <div className="flex items-end justify-between">
-                <span></span>
-                <div className="text-sm opacity-60 drop-shadow ">{repley.created_at}</div>
-                <div className="flex flex-col content-center items-center w-1/6">
-                    <img src={repley.user.profile_photo_url} className="h-8 w-8 flex-none rounded-full border-2" />
-                    <span className='text-xs'>{repley.user.name}</span>
-                </div>
-            </div>
-        </div>
+                    
                 </section>
 
                 <!-- <MsgReply
@@ -105,10 +95,7 @@ import api from "@/axios";
 import { onMounted, ref } from "vue";
 import ClinetBox from "../ComponantsDashboard/ClinetBox.vue";
 const messages = ref([]);
-const msg = ref({
-    full_name: "elmahdi bellaziz",
-    email: "elmahdibellaziz@outlook.com",
-});
+const msg = ref(null);
 onMounted(() => {
     api.get("/messages")
         .then(({ data }) => (messages.value = data))
@@ -117,5 +104,10 @@ onMounted(() => {
         });
     console.log(messages.value);
 });
+const handleSetAsActiveMag = (message) => {
+    msg.value = null;
+    msg.value = message;
+    console.log("handle set active msg done", msg.value);
+};
 </script>
 <style lang=""></style>

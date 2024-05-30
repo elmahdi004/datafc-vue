@@ -1,7 +1,7 @@
 <template>
     <div class="relative w-20 me-2">
       <div @click="toggleOpen"> 
-      <button-navigation/>
+      <button-navigation :renderTrigger="renderTrigger"/>
       </div>
   
       <!-- Full Screen Dropdown Overlay -->
