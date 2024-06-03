@@ -51,7 +51,7 @@
         default: 'py-1 bg-white '
       },
       renderTrigger: {
-        type: Function,
+        // type: Function,
         required: true
       }
     },

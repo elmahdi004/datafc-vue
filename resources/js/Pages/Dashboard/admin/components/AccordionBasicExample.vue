@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="absolute flex justify-center items-center transition-all duration-300 bottom-4 right-4 text-right">
-            <DemandDevis :formationId="id" :Code="Code" :Titre="Titre" />
+            <DemandDevis :formationId="formation.id" :Code="formation.Code" :Titre="formation.Titre" />
             <div @click="handleClick(`element${id}`)" class="inline-flex w-11 h-11 justify-center items-center bg-primary/70 hover:bg-primary/100 text-pink-50 hover:text-white rounded-full transition duration-150">
               <i :class="`fa-solid fa-arrow-down ${activeElement === `element${id}` ? 'rotate-[-180deg]' : 'rotate-0'}`"></i>
             </div>

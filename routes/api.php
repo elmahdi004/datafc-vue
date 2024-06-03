@@ -71,5 +71,6 @@ Route::controller(DemandeController::class)->group(function(){
 });
 Route::controller(MessageController::class)->group(function(){
     Route::get('/messages','index');
+    Route::post('/message','store');
 });
 

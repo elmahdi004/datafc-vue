@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Request;
 use app\http\Controllers\AuthController;
+use App\Http\Controllers\DemandeController;
 use App\Models\Demande;
 use App\Models\Formation;
 use App\Models\Message;
@@ -157,5 +158,8 @@ Route::middleware('auth')->group(function () {
 Route::get("/Client/Demande", function () {
     return Inertia::render('dashboardClient/PagesClient');
 });
+
+Route::post('/physique/add',[DemandeController::class,'storePhysique']);
+Route::post('/moral/add',[DemandeController::class,'storeMoral']);
 
 require __DIR__.'/auth.php';

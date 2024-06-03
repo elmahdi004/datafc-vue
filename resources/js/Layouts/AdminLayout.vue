@@ -285,6 +285,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import NavLink from "@/Layouts/NavLink.vue";
 import { Head,Link,usePage } from "@inertiajs/vue3";
+import { useStore } from "vuex";
 const menus = [
     {
         title: "Dashboard",
@@ -330,7 +331,8 @@ const isActive = (routeName) => {
 
 const open = ref(false);
 const open2 = ref(true);
-const props = defineProps(["title"]);
+const user = ref(null);
+const props = defineProps(["title","renderTrigger"]);
 const logout = (e) => {
     e.preventDefault();
     router.post(route("logout"));
@@ -340,22 +342,7 @@ const toggleOpen = () => {
         open2.value = !open2.value;
         console.log(open.value);
     };
-// const  renderTrigger = () => {
-//   return this.page.props.jetstream.managesProfilePhotos ? (
-//     <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-//       <img class="h-8 w-8 rounded-full object-cover" :src="page.props.auth.user?.profile_photo_url" :alt="page.props.auth.user?.name" />
-//     </button>
-//   ) : (
-//     <span class="inline-flex rounded-md">
-//       <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-primary hover:text-primary/80 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-primary/80 active:bg-gray-50 dark:active:bg-primary/80 transition ease-in-out duration-150">
-//         {{ page.props.auth.user?.name }}
-//         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-//           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-//         </svg>
-//       </button>
-//     </span>
-//   );
-// },
+
 </script>
 <style scoped>
 .active{

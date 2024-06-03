@@ -1,5 +1,5 @@
 <template lang="">
-    <AdminLayout title="Toutes les formations">
+    <AdminLayout title="Toutes les formations" :renderTrigger="renderTrigger">
         <main className=" p-8 mx-auto ">
             <div className="py-6 ">
                 <Link
@@ -26,11 +26,14 @@ import { Link } from "@inertiajs/vue3";
 import CategoryItem from "./components/CategoryItem.vue";
 import { onMounted, ref } from "vue";
 import api from "@/axios";
+import { useStore } from "vuex";
 const formations = ref([]);
-
+const renderTrigger = ref();
+const store = useStore();
 onMounted(async () => {
-    await api.get('/user').then(({data})=>console.log(data)).catch((e) => console.log(e));
-
+    // await api.get('/user').then(({data})=>console.log(data)).catch((e) => console.log(e));
+    await store.dispatch("fetchUser");
+    renderTrigger.value = store.state.auth;
     await api
         .get("/formations")
         .then(({ data }) => (formations.value = data))
