@@ -66,6 +66,9 @@ Route::controller(UserController::class)->group(function(){
 });
 Route::controller(DemandeController::class)->group(function(){
     Route::get('/demandes','index');
+    Route::get('/demandes/{id}','show');
+    Route::get('/demandes/{id}/valider','valider');
+    Route::get('/mesDemandes/{id}','mesDemandes');
     // Route::post('/user/{id}/block','block');
 
 });

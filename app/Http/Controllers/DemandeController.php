@@ -82,4 +82,18 @@ class DemandeController extends Controller
             'data' => 'Something you want to pass to front-end',
         ]);
     }
+    public function show($id){
+       return Demande::where('id',$id)->with(['demandeable','formation','user'])->first();
+    }
+    public function valider($id){
+        Demande::find($id)->update([
+            'status' => 1
+        ]);
+        return Redirect::back()->with([
+            'data' => 'Something you want to pass to front-end',
+        ]);
+    }
+    public function mesDemandes($id){
+            return Demande::where('user_id',$id)->with(['demandeable','formation.categorief'])->get();
+    }
 }

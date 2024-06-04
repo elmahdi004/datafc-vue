@@ -29,12 +29,12 @@
                 </div>
             </section>
             <section
+            v-if="msg != ''"
                 style="width: calc(100vw - 20rem)"
                 class="relative h-full border-l overflow-hidden"
             >
                 <!-- {Object.keys(msg).length ? <> -->
                 <div
-                    v-if="msg != null"
                     class="flex justify-between items-center bg-white shadow py-1 px-5 mb-1"
                     style="width: 100% !important"
                 >
@@ -95,9 +95,9 @@ import api from "@/axios";
 import { onMounted, ref } from "vue";
 import ClinetBox from "../ComponantsDashboard/ClinetBox.vue";
 const messages = ref([]);
-const msg = ref(null);
-onMounted(() => {
-    api.get("/messages")
+const msg = ref('');
+onMounted(async () => {
+    await api.get("/messages")
         .then(({ data }) => (messages.value = data))
         .catch((e) => {
             console.log(e);

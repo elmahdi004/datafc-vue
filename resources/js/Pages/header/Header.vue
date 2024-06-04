@@ -146,8 +146,11 @@
                                 >
                                     Gérer son compte
                                 </div>
-                                <DropdownLink href="/admin">
+                                <DropdownLink v-if="auth.is_admin == 1" href="/admin">
                                     Dashboard
+                                </DropdownLink>
+                                <DropdownLink v-else href="/Client/Demande">
+                                    Mes Demandes
                                 </DropdownLink>
                                 <!-- :href="route('profile.show')" -->
                                 <DropdownLink> Mon Compte </DropdownLink>
@@ -195,11 +198,13 @@ const sticky = ref(false);
 const openIndex = ref(-1);
 const store = useStore();
 const auth = ref(null);
+const mesDemandes = ref([]);
 onMounted(async () => {
     await store.dispatch('fetchUser');
     auth.value = store.state.auth;
-    console.log('My User is : ',store.state.auth);
-    console.log(auth.value);
+    if(auth.value){
+        api.get(`/mesDemandes/${auth.value.id}`).then(({data})=>mesDemandes.value = data).catch(e=>console.log(e));
+    }
 });
 const logout =  ()=>{
      api.get('/logout').then(({data})=>{

@@ -73,7 +73,6 @@
                                 <div class="flex items-center ps-4">
                                     <input
                                         onChange="{handleSelectAll}"
-                                        checked="{isCheckAll}"
                                         type="checkbox"
                                         name="selectAll"
                                         id="selectAll"
@@ -170,8 +169,7 @@ items-center"
                             <td class="w-4 p-4 col-span-1">
                                 <div class="flex items-center ps-4">
                                     <input
-                                        onChange="{handleClick}"
-                                        checked=""
+                                        
                                         id=""
                                         type="checkbox"
                                         class=" accent-primary"
@@ -214,12 +212,166 @@ items-center"
                                 {{item.status ? "validé" : "non validé"}}
                             </td>
                             <td class="col-span-2 px-6 py-4 flex justify-center  ">
-                                <InfoDemand data="{f}" action_f="{getData}" />
-                            </td>
+                                <div
+                                @click="handleDemandClick(item.id)"
+                                class=" cursor-pointer text-white me-2 bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center w-fit h-fit">
+                                <i class="fa-solid fa-eye"></i>
+      </div>                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <!-- {dataF?.last_page > 1 ? <RenderPaginationLinks /> : ""} -->
+                <Modal :show="action" @close="closeModal" maxWidth="2xl">
+                    <template #header>
+                        
+                    </template>
+                    <template #body>
+                        <div class="rounded-t bg-white mb-0   ">
+            <div class="grid grid-cols-2">
+              <div class=" font-bold text-xl text-primary p-2 ">
+                <h4>Formation </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">{{demande.formation.Code}} /  {{demande.formation.Titre}}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  {{isMoral ? 'Entreprise' : 'Nom'}}
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  <!-- {' '} -->
+                  {{isMoral
+                    ? demande.demandeable.entreprise
+                    : demande.demandeable.prenompm}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  {{isMoral ? 'Raison Sociale' : 'Prenom'}}
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  <!-- {' '} -->
+                  {{isMoral ? demande.demandeable.raisons : demande.demandeable.nompm}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">Email</h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  {{' '}}
+                  {{demande.email}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  Téléphone
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  {{demande.tel}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  Adresse
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  {{demande.adresse}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  {{isMoral
+                    ? 'responsible  ou Inerlocuteur'
+                    : "Type d'organisme"}}
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  {{isMoral
+                    ? demande.demandeable.resplonsable
+                    : demande.demandeable.typeOrgpm}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  {{isMoral
+                    ? 'responsible  ou Inerlocuteur'
+                    : "Type d'organisme"}}
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  {{isMoral
+                    ? demande.demandeable.telres
+                    : demande.demandeable.nomOrgpm}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  Nombre De Participants À Former :
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                 {{demande.nbrpers}}
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div>
+                <h4 class=" font-bold text-xl text-primary p-2 ">
+                  L'utilisateur qui a demandé
+                </h4>
+              </div>
+              <div>
+                <p class="font-semibold  text-xl text-black p-2">
+                  {{demande.user.name}}
+                </p>
+              </div>
+            </div>
+                        </div>
+                    </template>
+                    <template #footer>
+                        <button
+            class=" border-[#E9EDF9] transition hover:border-red-600 hover:bg-red-600 hover:text-white font-medium text-base py-2 px-4 rounded  me-2"
+            @click="closeModal"
+          >
+            Annuler
+          </button>
+          <button
+            class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded transition text-base disabled:bg-primary/40"
+            @click="payload_f(demande.id)"
+            :disabled="demande.status == 1"
+          >
+            valider
+          </button>
+                    </template>
+        </Modal>
+
             </div>
         </div>
         <ConfirmationdestroyMany />
@@ -228,13 +380,38 @@ items-center"
 <script setup>
 import TextInput from "@/Components/TextInput.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import Modal from '@/Components/Modal.vue';
 import api from "@/axios";
 import { onMounted, ref } from "vue";
 const demandes = ref([]);
+const action = ref(false);
+const isMoral = ref(false);
+const demande = ref(null);
+
 onMounted(() => {
     api.get("/demandes")
         .then(({ data }) => (demandes.value = data))
         .catch((e) => console.log(e));
 });
+
+const closeModal = () => {
+            action.value = false;
+        };
+
+const handleDemandClick = async (id) => {
+            await api.get(`/demandes/${id}`).then(({data}) => demande.value = data).catch(e=>console.log(e));
+            isMoral.value = demande.value.demandeable_type == "App\\Models\\PersMorale" ? true : false;
+            action.value = true;
+        };
+
+const payload_f = async (id)=>{
+await api.get(`/demandes/${id}/valider`);
+demandes.value.forEach((ele)=>{
+    if(ele.id == id){
+        ele.status = 1;
+    }
+});
+closeModal();
+}
 </script>
 <style lang=""></style>

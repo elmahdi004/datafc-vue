@@ -13,4 +13,14 @@ class FormationCategorieController extends Controller
     public function show($id){
         return FormationCategorie::find($id)->with('formation.programmeFormation')->first();
     }
+    public function store(Request $request){
+        $validRequest = $request->validate([
+            'code' => 'required',
+            'title' => 'required'
+        ]);
+        FormationCategorie::create([
+            'CodeFormation' => $validRequest['code'],
+            'Titre' => $validRequest['title'],
+        ]);
+    }
 }

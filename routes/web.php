@@ -11,6 +11,7 @@ use App\Models\Demande;
 use App\Models\Formation;
 use App\Models\Message;
 use App\Models\User;
+use App\Http\Controllers\FormationCategorieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -161,5 +162,6 @@ Route::get("/Client/Demande", function () {
 
 Route::post('/physique/add',[DemandeController::class,'storePhysique']);
 Route::post('/moral/add',[DemandeController::class,'storeMoral']);
+Route::post('/category/store',[FormationCategorieController::class,'store']);
 
 require __DIR__.'/auth.php';

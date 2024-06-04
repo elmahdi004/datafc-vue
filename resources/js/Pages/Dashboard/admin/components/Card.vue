@@ -7,7 +7,7 @@
     >
         <div class="flex items-center p-4 h-16">
             <div
-                class="h-14 w-14 py-4 flex items-center justify-center text-primary rounded-full border-2 bg-[#e1fdff]"
+                class="h-14 w-14 min-w-14 min-h-14 max-w-14 max-h-14 py-4 flex items-center justify-center text-primary rounded-full border-2 bg-[#e1fdff]"
             >{{ user.name.slice(0,2) }}</div>
             <div class="ml-4 flex-auto">
                 <div class="font-medium">

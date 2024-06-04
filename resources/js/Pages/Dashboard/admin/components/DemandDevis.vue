@@ -560,6 +560,7 @@
 <script>
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import { Inertia } from "@inertiajs/inertia";
 import Modal from "@/components/Modal.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/components/TextInput.vue";
@@ -568,13 +569,14 @@ import InputError from "@/Components/InputError.vue";
 
 //   import CustomInputNumber from './CustomInputNumber.vue';
 import PrimaryButton from "@/components/PrimaryButton.vue";
-
+import { useStore } from "vuex";
 export default {
     components: {
         Modal,
         InputLabel,
         TextInput,
         InputError,
+        Inertia,
         useForm,
         // Tab,
         // TabGroup,
@@ -644,9 +646,13 @@ export default {
         const processing = ref(false);
 
         const activePage = ref(true);
-
+        const store = useStore();
         const handleDemandClick = () => {
-            action.value = true;
+          store.dispatch('fetchUser');
+          if(store.state.auth.name != null){
+            return action.value = true;
+          }
+          return Inertia.visit('/login');
         };
 
         const closeModal = () => {
@@ -657,11 +663,12 @@ export default {
             nbr.value = newNbr;
         };
 
-        const payload_f = (type) => {
+        const payload_f = async (type) => {
             if (type == "physique") {
-                physique.post("/physique/add");
+                await physique.post("/physique/add");
+                //  Inertia.visit('Formations/infoForrmation/FormationInfo');
             } else if (type == "moral") {
-                moral.post("/moral/add");
+                await moral.post("/moral/add");
             }
         };
 
