@@ -113,6 +113,8 @@ import { useStore } from "vuex";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const formations = ref([]);
 const renderTrigger = ref();
 const action = ref(false);
@@ -142,6 +144,8 @@ const openModal = ()=>{
 }
 const addFunction = async ()=>{
     await categorie.post('/category/store');
+        toast.success("Catégorie créée avec succès");
+        formations.value.push({CodeFormation : categorie.code,Titre : categorie.title})
     closeModal();
 }
 </script>

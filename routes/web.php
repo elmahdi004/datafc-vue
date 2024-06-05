@@ -12,6 +12,9 @@ use App\Models\Formation;
 use App\Models\Message;
 use App\Models\User;
 use App\Http\Controllers\FormationCategorieController;
+use App\Http\Controllers\InfoController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -164,4 +167,5 @@ Route::post('/physique/add',[DemandeController::class,'storePhysique']);
 Route::post('/moral/add',[DemandeController::class,'storeMoral']);
 Route::post('/category/store',[FormationCategorieController::class,'store']);
 
+Route::post('/addUser',[InfoController::class,'register']);
 require __DIR__.'/auth.php';

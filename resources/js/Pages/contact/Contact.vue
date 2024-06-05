@@ -235,7 +235,10 @@ import ClientLayout from "@/Layouts/ClientLayout.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useStore } from "vuex";
 import { onMounted, ref } from "vue";
+import { useToast } from "vue-toastification";
+
 import api from "@/axios";
+const toast = useToast();
 const monStyle = {
     border: "0",
     height: "450px",
@@ -276,8 +279,10 @@ const handleChange = (e) => {
     //   [name]: value,
     // });
 };
-const handleSubmit = () => {
-  api.post('/message',message.value).then(({data})=>console.log(data)).catch((e)=>console.log(e))
+const handleSubmit = async () => {
+      await api.post('/message',message.value).then(({data})=>console.log(data)).catch((e)=>console.log(e));
+      const toastId = toast.success('Le message est bien envoyer');
+
 };
 </script>
 <style lang=""></style>

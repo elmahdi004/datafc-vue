@@ -4,9 +4,14 @@ import store from './store.js';
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
 // import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
+const options = {
+    // You can set your default options here
+};
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
@@ -14,6 +19,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props), })
             .use(plugin)
             .use(store)
+            .use(Toast, options)
             .mixin({methods: {route},})
             .mount(el);
     },

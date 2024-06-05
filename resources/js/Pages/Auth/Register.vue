@@ -11,41 +11,40 @@ import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 const form = useForm({
     name: '',
     email: '',
+    tel : '',
     password: '',
     password_confirmation: '',
 });
 
-const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
-};
+const onSubmit = ()=>{
+  form.post('/addUser');
+}
 </script>
 
 <template>
     <AuthenticationCard>
       <Head title="Register"/>
 
-      <form onSubmit={onSubmit}>
+      <form >
         <div>
           <InputLabel for="name">Nom</InputLabel>
-          <TextInput id="name" type="text" class="mt-1 block w-full" :value="form.data.name" required autoFocus autoComplete="name"/>
+          <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name"  autoFocus autoComplete="name"/>
           <InputError class="mt-2" :message="form.errors.name"/>
         </div>
         <div class="mt-4">
           <InputLabel for="email">Email</InputLabel>
-          <TextInput id="email" type="email" :class="['mt-1 block w-full', form.data.email ? 'border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 focus:border-red-500' : '']" :value="form.data.email"  required/>
-          <InputError class="mt-2" message="form.errors.email"/>
+          <TextInput id="email" type="email" :class="['mt-1 block w-full', form.data.email ? 'border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 focus:border-red-500' : '']" v-model="form.email"  />
+          <InputError class="mt-2" :message="form.errors.email"/>
         </div>
         <div class="mt-4">
           <InputLabel for="tel">Tél</InputLabel>
-          <TextInput id="tel" type="text" name="telephone" :class="['mt-1 block w-full', form.data.email ? 'border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 focus:border-red-500' : '']"  :value="form.data.tel" autoComplete="telephone"/>
-          <InputError class="mt-2" message="form.errors.tel"/>
+          <TextInput id="tel" type="text" name="telephone" :class="['mt-1 block w-full', form.data.tel ? 'border-red-500 text-red-900 placeholder-red-700  focus:ring-red-500 focus:border-red-500' : '']"  v-model="form.tel" autoComplete="telephone"/>
+          <InputError class="mt-2" :message="form.errors.tel"/>
         </div>
 
         <div class="mt-4">
           <InputLabel for="password">Mote de passe</InputLabel>
-          <TextInput id="password" type="password" class="mt-1 block w-full" :value="form.data.password" required autoComplete="new-password"/>
+          <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password"  autoComplete="new-password"/>
           <InputError class="mt-2" :message="form.errors.password"/>
         </div>
 
@@ -53,8 +52,8 @@ const submit = () => {
           <InputLabel for="password_confirmation">
             Confirme Mote de passe
           </InputLabel>
-          <TextInput id="password_confirmation" type="password" class="mt-1 block w-full" value="form.data.password_confirmation"  required autoComplete="new-password"/>
-          <InputError class="mt-2" message="form.errors.password_confirmation"/>
+          <TextInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation"    autoComplete="new-password"/>
+          <InputError class="mt-2" :message="form.errors.password_confirmation"/>
         </div>
 
         <!-- {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (<div class="mt-4">
@@ -78,11 +77,11 @@ const submit = () => {
           </div>)} -->
 
         <div class="flex items-center justify-end mt-4">
-          <Link href="" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 dark:focus:ring-offset-primary">
+          <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 dark:focus:ring-offset-primary">
           Déjà enregistré?
-          </Link>
+          </button>
 
-          <PrimaryButton :class="['ml-4']" :disabled="form.processing">
+          <PrimaryButton @click="onSubmit" :class="['ml-4']" :disabled="form.processing">
           Registre
           </PrimaryButton>
         </div>
