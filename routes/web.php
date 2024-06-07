@@ -13,6 +13,7 @@ use App\Models\Message;
 use App\Models\User;
 use App\Http\Controllers\FormationCategorieController;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\NosClientController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -168,4 +169,6 @@ Route::post('/moral/add',[DemandeController::class,'storeMoral']);
 Route::post('/category/store',[FormationCategorieController::class,'store']);
 
 Route::post('/addUser',[InfoController::class,'register']);
+
+Route::post('/add-client-logo',[NosClientController::class,'store']);
 require __DIR__.'/auth.php';

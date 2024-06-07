@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
     public function index(){
-        return Message::all();
+        return Message::with('user')->get();
     }
     public function store(Request $request){
         if($request->user_id != null){
@@ -31,5 +31,8 @@ class MessageController extends Controller
         }
 
         return $request;
+    }
+    public function destroy($id){
+        return Message::find($id)->delete();
     }
 }

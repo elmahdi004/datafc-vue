@@ -18,6 +18,6 @@ class Message extends Model
         return $this->hasMany(Repley::class);
     }
     public function user(){
-        return $this->belongsTo(Message::class,'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
 }

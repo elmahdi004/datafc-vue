@@ -205,7 +205,7 @@
                             </form>
                         </div>
                     </div>
-                    <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
+                    <div v-if="settings[8]" className="w-full px-4 lg:w-5/12 xl:w-4/12">
                         <div
                             className="map-container overflow-hidden rounded-xl shadow-lg"
                         >
@@ -215,7 +215,7 @@
                                     height: '450px';
                                     width: '100%';
                                 "
-                                src="data?.google_map"
+                                :src="settings[8].value"
                                 width="600"
                                 height="450"
                                 frameBorder="0"

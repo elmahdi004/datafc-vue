@@ -75,5 +75,8 @@ Route::controller(DemandeController::class)->group(function(){
 Route::controller(MessageController::class)->group(function(){
     Route::get('/messages','index');
     Route::post('/message','store');
+    Route::delete('/message/{id}','destroy');
 });
+Route::get('/nosclients',[NosClientController::class,'index']);
+Route::delete('/nosclients/{id}',[NosClientController::class,'destroy']);
 

@@ -1,9 +1,9 @@
 <template lang="">
     <AdminLayout title="info">
         <div className="flex justify-center items-center ">
-            <div className="container mx-auto  lg:px-20">
+            <div className="container mx-auto lg:px-20">
                 <div
-                    className="w-full bg-white p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-lg"
+                    className="w-full bg-white p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-lg mx-auto"
                 >
                     <div className="flex">
                         <h1
@@ -133,12 +133,13 @@
                         </PrimaryButton>
                     </div>
                 </div>
-                <div
-                    className="w-full lg:-mt-96 lg:w-2/6  ml-auto  rounded-2xl overflow-hidden shadow-md"
+                <!-- <div
+                    v-if="settings[8]"
+                    className="absolute right-0 top-1/2 w-full lg:-mt-96 lg:w-2/6  ml-auto  rounded-2xl overflow-hidden shadow-md"
                 >
                     <iframe
-                        style="{monStyle}"
-                        src="{data.google_map}"
+                        style=""
+                        :src="settings[8].value"
                         width="600"
                         height="450"
                         frameBorder="0"
@@ -146,10 +147,10 @@
                         aria-hidden="false"
                         tabIndex="0"
                     ></iframe>
-                </div>
+                </div> -->
             </div>
         </div>
-        <Clientlogo />
+        <ClientLogo />
     </AdminLayout>
 </template>
 <script setup>
@@ -158,6 +159,7 @@ import PrimaryButton from "@/components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { onMounted, ref } from "vue";
 import api from "@/axios.js";
+import ClientLogo from "../ComponantsDashboard/ClientLogo.vue";
 const settings = ref([
     {
         key: "email",

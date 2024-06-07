@@ -14,5 +14,7 @@ class Noslient extends Model
         'imgSrc',
         'isActive',
         'user_id',
+        'website',
+        'name'
     ];
 }

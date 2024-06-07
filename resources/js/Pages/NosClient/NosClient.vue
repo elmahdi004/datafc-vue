@@ -1,55 +1,34 @@
 <template lang="">
-<section className="bg-white py-32">
-                <h3 className="sm:text-3xl sm:leading-tight text-center pt-5 md:text-4xl md:leading-tight dark:text-white">Nos Clients</h3>
-                <div className="flex h-[30vh] justify-center items-center mt-[250px] mb-[300px] lg:mt-40 lg:mb-0">
-                    <div className="flex flex-wrap mx-2">
-                        <div className="w-full px-4">
-                            <div className="flex flex-wrap items-center justify-center">
-                                <!-- {/* {listClient?.map((c, i) => <SingleImage
-                                    key={i + "c"}
-                                    href={c.href}
-                                    Alt={c.Alt}
-                                    imgSrc={c.imgSrc}
-                                />)} */} -->
-                                <div className="image w-40 h-40">
-                                    <img src="/images/fertich-removebg-preview.png" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40 mt-[60px]">
-                                    <img src="/images/Capture-removebg-preview.png" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40">
-                                    <img src="/images/Capture-removebg-preview (1).png" alt="" srcset="" />
-                                </div>                                
-                                <div className="image w-40 h-40  mt-[100px]">
-                                    <img src="/images/Capture-removebg-preview (5).png" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40  mt-[20px]">
-                                    <img src="/images/Capture-removebg-preview (4).png" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40  mt-[100px]">
-                                    <img src="/images/logo_marsa.jpg" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40 mt-[100px] object-cover">
-                                    <img src="/images/Capture-removebg-preview (2).png" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40  mt-[10px] object-cover">
-                                    <img src="/images/Capture-removebg-preview (6).png" alt="" srcset="" />
-                                </div>
-                                <div className="image w-40 h-40  mt-[60px] object-cover">
-                                    <img src="/images/Capture-removebg-previews.png" alt="" srcset="" />
-                                </div>
-                                
-                            </div>
-                        </div>
+    <section className="bg-white py-32">
+        <h3
+            className="sm:text-3xl sm:leading-tight text-center pt-5 md:text-4xl md:leading-tight dark:text-white"
+        >
+            Nos Clients
+        </h3>
+        <div className="container flex h-[30vh] justify-center items-center">
+            <div className="flex flex-wrap -mx-2">
+                <div className="w-full px-4" v-if="nosClients.length > 0">
+                    <div className="flex flex-wrap items-center justify-center">
+                        <a  v-for="(item, index) in nosClients" :key="index"
+                            :href="item.website"
+                            className="mx-4 flex w-[80px] items-center justify-center  2xl:w-[160px]  ease-in-out delay-150 duration-700 transition-opacity	 opacity-70  hover:opacity-100"
+                        >
+                            <img :src="`/storage/${item.href}`" :alt="item.Alt"
+                            className="w-full " />
+                        </a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 </template>
-<script>
-export default {
-    
-}
+<script setup>
+import api from "@/axios";
+import { onMounted, ref } from "vue";
+
+const nosClients = ref([]);
+onMounted(()=>{
+    api.get('/nosclients').then(({data})=>nosClients.value = data).catch((e)=>console.log(e));
+});
 </script>
-<style lang="">
-    
-</style>
+<style lang=""></style>
