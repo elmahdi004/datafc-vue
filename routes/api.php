@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/categories',[FormationCategorieController::class,'index']);
 Route::get('/categorie/{id}',[FormationCategorieController::class,'show']);
-Route::post('/formation/create',[FormationController::class,'store']);
+// Route::post('/formation/create',[FormationController::class,'store']);
 
 Route::get('/info',[InfoController::class,'info'])->name('info');
 Route::post('/info',[InfoController::class,'store'])->name('info.store');

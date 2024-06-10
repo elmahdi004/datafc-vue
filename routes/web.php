@@ -15,6 +15,8 @@ use App\Http\Controllers\FormationCategorieController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\NosClientController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\FormationController;
+use App\Http\Middleware\CheckIfAuthMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,7 +121,7 @@ foreach ($adminList as $link) {
         //$request->session()->flash('flash.bannerStyle', 'error');
         $com = 'Dashboard/admin/' . $link["element"];
         return Inertia::render($com);
-    });
+    })->middleware(CheckIfAuthMiddleware::class);
 }
 Route::get("/admin", function () {
     $demandesCount = Demande::count();
@@ -138,7 +140,7 @@ Route::get("/admin", function () {
         'latsetDemandes'=>$latsetDemandes,
         'latsetMessages'=>$latsetMessages
     ]);
-});
+})->middleware(CheckIfAuthMiddleware::class);
 
 Route::get("/admin/formtion/edit/{idf}", function ($idf) {
     return Inertia::render('Dashboard/admin/formtion/Edit', ['idf' => $idf]);
@@ -171,4 +173,6 @@ Route::post('/category/store',[FormationCategorieController::class,'store']);
 Route::post('/addUser',[InfoController::class,'register']);
 
 Route::post('/add-client-logo',[NosClientController::class,'store']);
+Route::post('/formation/create',[FormationController::class,'store']);
+
 require __DIR__.'/auth.php';

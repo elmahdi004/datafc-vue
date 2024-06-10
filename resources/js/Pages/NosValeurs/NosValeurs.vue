@@ -23,6 +23,10 @@
             <h2 className="text-xl font-semibold mb-2">La performance</h2>
             <p className="text-gray-700">Nous nous efforçons d'atteindre l'excellence dans tout ce que nous entreprenons et nous nous engageons à offrir des résultats de haute qualité à nos clients.</p>
           </div>
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-xl font-semibold mb-2">l’honnêteté</h2>
+            <p className="text-gray-700">nous nous engageons à offrir des résultats de haute qualité à nos clients.</p>
+          </div>
         </div>
       </div>
     </div>

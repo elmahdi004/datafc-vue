@@ -1,5 +1,10 @@
 <template lang="">
       <ClientLayout>
+        <h3>
+          {{
+categoryWithFormations
+          }}
+        </h3>
       <div class=' pb-14'>
         <HeroFormationInfo v-if="categoryWithFormations != null" :title="categoryWithFormations.Titre"/>
         <div class=' mt-20 ' v-if="categoryWithFormations != null">

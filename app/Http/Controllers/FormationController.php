@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Formation;
 use App\Models\FormationCategorie;
+use Illuminate\Support\Facades\Log;
 
 class FormationController extends Controller
 {
@@ -12,6 +13,7 @@ class FormationController extends Controller
         return FormationCategorie::with('formation')->get();
     }
     public function store(Request $request){
+        Log::info($request->all());
         $request->validate([
             'Code' => 'required|unique:formations|max:255',
             'Titre' => 'required|max:255',
@@ -30,11 +32,19 @@ class FormationController extends Controller
         $data = [];
         $data["Code"] = $request->Code;
         $data["Titre"] = $request->Titre;
-        $data["Population_cible"] = $request->Population_cible||" ";
-        $data["Duree"] = $request->Duree||" ";
-        $data["Objectifs"] = $request->Objectifs||" ";
+        $data["Population_cible"] = $request->Population_cible;
+        $data["Duree"] = $request->Duree;
+        $data["Objectifs"] = $request->Objectifs;
         $data["formation_categories_id"] = $request->formationCatId;
-        $formation = Formation::create($data);
+        $formation = Formation::create([
+            "Code" => $request->Code,
+            "Titre" => $request->Titre,
+            "Population_cible" => $request->Population_cible,
+            "Duree" => $request->Duree,
+            "Objectifs" => $request->Objectifs,
+            "formation_categories_id" => $request->formationCatId,
+        ]);
+        // $formation = Formation::create($data);
        $formation->programmeFormation()->createMany($request->programme_formations);
     }
     public function destroy($id){

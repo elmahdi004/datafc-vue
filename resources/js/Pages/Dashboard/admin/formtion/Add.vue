@@ -7,7 +7,6 @@
                     <select
                         id="countries_multiple"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        name="formationCatId"
                         v-model="formationCatId"
                     >
                         <!-- <option selected>Choose a category</option> -->
@@ -19,7 +18,7 @@
                             {{ item.CodeFormation }} : {{ item.Titre }}
                         </option>
                     </select>
-                    <InputError :message="errors.Titre" class="mt-2" />
+                    <InputError :message="dataFormation.errors.formationCatId" class="mt-2" />
                 </div>
             </div>
             <hr />
@@ -30,7 +29,7 @@
                         <TextInput
                             type="text"
                             name="Code"
-                            :value="dataFormation?.Code || ''"
+                            v-model="dataFormation.Code"
                             @change="
                                 updateDataFormation('Code', $event.target.value)
                             "
@@ -41,7 +40,7 @@
                                     : '',
                             ]"
                         />
-                        <InputError :message="errors.Code" class="mt-2" />
+                        <InputError :message="dataFormation.errors.Code" class="mt-2" />
                     </div>
                 </div>
                 <div class="w-full lg:w-9/12 px-4">
@@ -50,7 +49,7 @@
                         <TextInput
                             type="text"
                             name="Titre"
-                            :value="dataFormation?.Titre || ''"
+                            v-model="dataFormation.Titre"
                             @change="
                                 updateDataFormation(
                                     'Titre',
@@ -64,7 +63,7 @@
                                     : '',
                             ]"
                         />
-                        <InputError :message="errors.Titre" class="mt-2" />
+                        <InputError :message="dataFormation.errors.Titre" class="mt-2" />
                     </div>
                 </div>
             </div>
@@ -75,7 +74,7 @@
                         <TextInput
                             type="text"
                             name="Population_cible"
-                            :value="dataFormation?.Population_cible || ''"
+                            v-model="dataFormation.Population_cible "
                             @change="
                                 updateDataFormation(
                                     'Population_cible',
@@ -90,7 +89,7 @@
                             ]"
                         />
                         <InputError
-                            :message="errors.Population_cible"
+                            :message="dataFormation.errors.Population_cible"
                             class="mt-2"
                         />
                     </div>
@@ -101,7 +100,7 @@
                         <TextInput
                             type="text"
                             name="Duree"
-                            :value="dataFormation?.Duree || ''"
+                            v-model="dataFormation.Duree"
                             @change="
                                 updateDataFormation(
                                     'Duree',
@@ -115,7 +114,7 @@
                                     : '',
                             ]"
                         />
-                        <InputError :message="errors.Duree" class="mt-2" />
+                        <InputError :message="dataFormation.errors.Duree" class="mt-2" />
                     </div>
                 </div>
             </div>
@@ -125,7 +124,7 @@
                 <InputLabel value="Objectifs" />
                 <textarea
                     name="Objectifs"
-                    :value="dataFormation?.Objectifs || ''"
+                    v-model="dataFormation.Objectifs"
                     @change="
                         updateDataFormation('Objectifs', $event.target.value)
                     "
@@ -138,7 +137,7 @@
                     ]"
                     placeholder="Write your thoughts here..."
                 ></textarea>
-                <InputError :message="errors.Objectifs" class="mt-2" />
+                <InputError :message="dataFormation.errors.Objectifs" class="mt-2" />
             </div>
             <!-- End textarea for Objectif -->
             <div>
@@ -160,20 +159,23 @@ import AddProg from "./Partials/AddProg.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import api from "@/axios.js";
 import { useStore } from "vuex";
+import { useForm } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
 // import AddTypeFormation from "@/Components/AddTypeFormation.vue";
 const store = useStore();
-const dataFormation = ref({
+const toast = useToast();
+const formationCatId = ref(null);
+const dataFormation = useForm({
     Code: "",
     Titre: "",
     Population_cible: "",
     Duree: "",
     Objectifs: "",
-    formationCatId: 9,
+    formationCatId: formationCatId.value,
     programme_formations: store.state.programme,
 });
 const categories = ref([]);
 const errors = ref({});
-const formationCatId = ref(null);
 
 onMounted(() => {
     api.get("/categories").then(({ data }) => (categories.value = data));
@@ -188,10 +190,30 @@ function updateDataFormation(key, value) {
 }
 
 function addNewFormation() {
-    console.log(store.state.programmes);
-    api.post("/formation/create", dataFormation.value)
-        .then((e) => console.log("Done"))
-        .catch((e) => console.log(e));
+    // console.log(store.state.programmes);
+    // const formation = {
+    // Code: dataFormation.Code,
+    // Titre: dataFormation.Titre,
+    // Population_cible: dataFormation.Population_cible,
+    // Duree: dataFormation.Duree,
+    // Objectifs: dataFormation.Objectifs,
+    // formationCatId: formationCatId.value,
+    // programme_formations: store.state.programme,
+    // }
+    dataFormation.formationCatId = formationCatId.value;
+    dataFormation.programme_formations = store.state.programme;
+    dataFormation.post('/formation/create',{
+        onSuccess : ()=>{
+            toast.success('has been added');
+            store.state.programme = [];
+        },
+        onError : ()=>{
+            toast.error('we have an error please try again');
+        },
+    })
+    // api.post("/formation/create", formation)
+    //     .then((e) => console.log("Done"))
+    //     .catch((e) => console.log(e));
 }
 </script>
 

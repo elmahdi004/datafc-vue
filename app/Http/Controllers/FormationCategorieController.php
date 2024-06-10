@@ -11,7 +11,7 @@ class FormationCategorieController extends Controller
         return FormationCategorie::all();
     }
     public function show($id){
-        return FormationCategorie::find($id)->with('formation.programmeFormation')->first();
+        return FormationCategorie::where('id',$id)->with('formation.programmeFormation')->first();
     }
     public function store(Request $request){
         $validRequest = $request->validate([
