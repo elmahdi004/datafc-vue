@@ -11,6 +11,13 @@ class MessageController extends Controller
         return Message::with('user')->get();
     }
     public function store(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'tel'=>'required',
+            'objet'=>'required',
+            'message'=>'required',
+        ]);
         if($request->user_id != null){
         Message::create([
             'tel'=>$request->tel,
@@ -30,7 +37,7 @@ class MessageController extends Controller
             ]);
         }
 
-        return $request;
+        // return response('has been added',200);
     }
     public function destroy($id){
         return Message::find($id)->delete();

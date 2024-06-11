@@ -569,6 +569,7 @@ import InputError from "@/Components/InputError.vue";
 
 //   import CustomInputNumber from './CustomInputNumber.vue';
 import PrimaryButton from "@/components/PrimaryButton.vue";
+import {useToast} from 'vue-toastification';
 import { useStore } from "vuex";
 export default {
     components: {
@@ -644,7 +645,7 @@ export default {
             "Fondation",
         ]);
         const processing = ref(false);
-
+        const toast = useToast();
         const activePage = ref(true);
         const store = useStore();
         const handleDemandClick = () => {
@@ -667,8 +668,12 @@ export default {
             if (type == "physique") {
                 await physique.post("/physique/add");
                 //  Inertia.visit('Formations/infoForrmation/FormationInfo');
+                closeModal();
+                toast.success("Votre demande est bien créer")
             } else if (type == "moral") {
                 await moral.post("/moral/add");
+                closeModal();
+                toast.success("Votre demande est bien créer")
             }
         };
 
@@ -720,6 +725,7 @@ export default {
             activePage,
             physique,
             moral,
+            toast,
             handleDemandClick,
             closeModal,
             updateNbr,

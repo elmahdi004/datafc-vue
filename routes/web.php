@@ -17,6 +17,7 @@ use App\Http\Controllers\NosClientController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FormationController;
 use App\Http\Middleware\CheckIfAuthMiddleware;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,4 +176,7 @@ Route::post('/addUser',[InfoController::class,'register']);
 Route::post('/add-client-logo',[NosClientController::class,'store']);
 Route::post('/formation/create',[FormationController::class,'store']);
 
+Route::controller(MessageController::class)->group(function(){
+    Route::post('/message','store');
+});
 require __DIR__.'/auth.php';

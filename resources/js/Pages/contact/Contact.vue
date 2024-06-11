@@ -1,15 +1,15 @@
 <template lang="">
     <div>
         <ClientLayout title="Contact Nous">
-            <div className="container mx-auto mt-40 mb-4">
-                <div className="flex flex-wrap justify-center">
-                    <div className="w-full px-4 xl:w-10/12">
+            <div class="container mx-auto mt-40 mb-4">
+                <div class="flex flex-wrap justify-center">
+                    <div class="w-full px-4 xl:w-10/12">
                         <div v-if="settings.length > 0"
-                            className="-mx-4 mb-16 flex flex-wrap bg-primary py-14 px-5 sm:p-14"
+                            class="-mx-4 mb-16 flex flex-wrap bg-primary py-14 px-5 sm:p-14"
                         >
-                            <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-                                <div className="mb-5 flex lg:mb-0">
-                                    <div className="mr-4">
+                            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                                <div class="mb-5 flex lg:mb-0">
+                                    <div class="mr-4">
                                         <svg
                                             width="32"
                                             height="32"
@@ -25,21 +25,21 @@
                                     </div>
                                     <div>
                                         <h5
-                                            className="text-lg font-semibold text-white"
+                                            class="text-lg font-semibold text-white"
                                         >
                                             Email
                                         </h5>
                                         <p
-                                            className="text-base font-medium text-[#C1CCF2]"
+                                            class="text-base font-medium text-[#C1CCF2]"
                                         >
                                             {{settings[0].value}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-                                <div className="mb-5 flex lg:mb-0">
-                                    <div className="mr-4">
+                            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                                <div class="mb-5 flex lg:mb-0">
+                                    <div class="mr-4">
                                         <svg
                                             width="32"
                                             height="32"
@@ -63,26 +63,26 @@
                                     </div>
                                     <div>
                                         <h5
-                                            className="text-lg font-semibold text-white"
+                                            class="text-lg font-semibold text-white"
                                         >
                                             Phone Number
                                         </h5>
                                         <p
-                                            className="text-base font-medium text-[#C1CCF2]"
+                                            class="text-base font-medium text-[#C1CCF2]"
                                         >
                                             {{settings[1].value}}
                                         </p>
                                         <p
-                                            className="text-base font-medium text-[#C1CCF2]"
+                                            class="text-base font-medium text-[#C1CCF2]"
                                         >
                                         {{settings[2].value}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-                                <div className="mb-5 flex lg:mb-0">
-                                    <div className="mr-4">
+                            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                                <div class="mb-5 flex lg:mb-0">
+                                    <div class="mr-4">
                                         <svg
                                             width="32"
                                             height="32"
@@ -102,12 +102,12 @@
                                     </div>
                                     <div>
                                         <h5
-                                            className="text-lg font-semibold text-white"
+                                            class="text-lg font-semibold text-white"
                                         >
                                             Office Address
                                         </h5>
                                         <p
-                                            className="text-base font-medium text-[#C1CCF2]"
+                                            class="text-base font-medium text-[#C1CCF2]"
                                         >
                                         {{settings[3].value}}
                                         </p>
@@ -117,13 +117,13 @@
                         </div>
                     </div>
                 </div>
-                <div className="-mx-4 flex flex-wrap justify-center">
-                    <div className="w-full px-4 lg:w-7/12 xl:w-6/12">
-                        <div className="mb-12 lg:mb-0 lg:mr-4">
-                            <form @submit="handleSubmit">
-                                <div className="-mx-4 flex flex-wrap">
-                                    <div className="w-full px-4 md:w-2/2">
-                                        <div className="mb-7">
+                <div class="-mx-4 flex flex-wrap justify-center">
+                    <div class="w-full px-4 lg:w-7/12 xl:w-6/12">
+                        <div class="mb-12 lg:mb-0 lg:mr-4">
+                            <form @submit.prevent="handleSubmit">
+                                <div class="-mx-4 flex flex-wrap">
+                                    <div class="w-full px-4 md:w-2/2">
+                                        <div class="mb-7">
                                             <TextInput
                                                 id="Nom complet"
                                                 v-model="message.name"
@@ -132,12 +132,13 @@
                                                 type="text"
                                                 name="full_name"
                                                 placeholder="Nom Complet"
-                                                className="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary disabled:bg-slate-100"
+                                                class="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary disabled:bg-slate-100"
                                             />
+                                            <InputError :message="message.errors.name"></InputError>
                                         </div>
                                     </div>
-                                    <div className="w-full px-4 md:w-1/2">
-                                        <div className="mb-7">
+                                    <div class="w-full px-4 md:w-1/2">
+                                        <div class="mb-7">
                                             <TextInput
                                                 id="Tél"
                                                 v-model="message.tel"
@@ -145,12 +146,13 @@
                                                 type="tel"
                                                 name="tel"
                                                 placeholder="Téléphone"
-                                                className="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary"
+                                                class="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary"
                                             />
+                                            <InputError :message="message.errors.tel"></InputError>
                                         </div>
                                     </div>
-                                    <div className="w-full px-4 md:w-1/2">
-                                        <div className="mb-7">
+                                    <div class="w-full px-4 md:w-1/2">
+                                        <div class="mb-7">
                                             <TextInput
                                                 id="email"
                                                 v-model="message.email"
@@ -161,12 +163,13 @@
                                                 type="email"
                                                 name="email"
                                                 placeholder="Email"
-                                                className="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary disabled:bg-slate-100"
+                                                class="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary disabled:bg-slate-100"
                                             />
+                                            <InputError :message="message.errors.email"></InputError>
                                         </div>
                                     </div>
-                                    <div className="w-full px-4 md:w-2/2">
-                                        <div className="mb-7">
+                                    <div class="w-full px-4 md:w-2/2">
+                                        <div class="mb-7">
                                             <TextInput
                                                 id="text"
                                                 v-model="message.objet"
@@ -174,12 +177,13 @@
                                                 type="text"
                                                 name="object"
                                                 placeholder="Objet"
-                                                className="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary"
+                                                class="w-full border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary"
                                             />
+                                            <InputError :message="message.errors.objet"></InputError>
                                         </div>
                                     </div>
-                                    <div className="w-full px-4">
-                                        <div className="mb-7">
+                                    <div class="w-full px-4">
+                                        <div class="mb-7">
                                             <textarea
                                                 id="message"
                                                 v-model="message.message"
@@ -187,15 +191,22 @@
                                                 name="msg"
                                                 placeholder="Message"
                                                 rows="6"
-                                                className="border-gray-300 dark:border-primary/80 dark:text-gray-300   focus:ring-primary rounded-md shadow-sm w-full resize-none border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary"
+                                                class="border-gray-300 dark:border-primary/80 dark:text-gray-300   focus:ring-primary rounded-md shadow-sm w-full resize-none border border-form-stroke bg-white py-4 px-6 placeholder-[#9699A6] shadow-input outline-none focus:border-primary"
                                             ></textarea>
+                                            <InputError :message="message.errors.message"></InputError>
                                         </div>
                                     </div>
-                                    <div className="w-full px-4">
+                                    <div class="w-full px-4">
                                         <div>
-                                            <button
+                                            <button v-if="loading"
                                                 type="submit"
-                                                className="inline-flex items-center justify-center border-2 border-transparent bg-primary py-3 px-10 text-base font-semibold text-white hover:bg-opacity-90"
+                                                class="inline-flex items-center justify-center border-2 border-transparent bg-primary py-3 px-10 text-base font-semibold text-white hover:bg-opacity-90"
+                                            >
+                                                <Spinner width="w-4" height="h-4" color="border-t-white border-s-white"></Spinner>
+                                            </button>
+                                            <button v-else
+                                                type="submit"
+                                                class="inline-flex items-center justify-center border-2 border-transparent bg-primary py-3 px-10 text-base font-semibold text-white hover:bg-opacity-90"
                                             >
                                                 envoyer Message
                                             </button>
@@ -205,9 +216,9 @@
                             </form>
                         </div>
                     </div>
-                    <div v-if="settings[8]" className="w-full px-4 lg:w-5/12 xl:w-4/12">
+                    <div v-if="settings[8]" class="w-full px-4 lg:w-5/12 xl:w-4/12">
                         <div
-                            className="map-container overflow-hidden rounded-xl shadow-lg"
+                            class="map-container overflow-hidden rounded-xl shadow-lg"
                         >
                             <iframe
                                 style="
@@ -236,15 +247,18 @@ import TextInput from "@/Components/TextInput.vue";
 import { useStore } from "vuex";
 import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
-
+import Spinner from "@/Components/Spinner.vue";
+import {useForm} from '@inertiajs/vue3';
 import api from "@/axios";
+import InputError from '@/Components/InputError.vue';
+
 const toast = useToast();
 const monStyle = {
     border: "0",
     height: "450px",
     width: "100%",
 };
-const message = ref({
+const message = useForm({
     name: "",
     email: "",
     tel: "",
@@ -255,11 +269,12 @@ const message = ref({
 const disabled = ref(false);
 const settings = ref([]);
 const store = useStore();
+const loading = ref(false);
 onMounted(async () => {
     await store.dispatch("fetchUser");
     if (store.state.auth.name != null) {
       disabled.value = true;
-        message.value = {
+        message = {
             name: store.state.auth.name,
             email: store.state.auth.email,
             tel: "",
@@ -280,8 +295,17 @@ const handleChange = (e) => {
     // });
 };
 const handleSubmit = async () => {
-      await api.post('/message',message.value).then(({data})=>console.log(data)).catch((e)=>console.log(e));
-      const toastId = toast.success('Le message est bien envoyer');
+      loading.value = true;
+    //   await api.post('/message',message.value).then(({data})=>console.log(data)).catch((e)=>console.log(e));
+      await message.post('/message',{
+        onSuccess:()=>{
+            toast.success('Le message est bien envoyer');
+        },
+        onError:()=>{
+            toast.error("Please try again");
+        }
+      });
+      loading.value = false;
 
 };
 </script>

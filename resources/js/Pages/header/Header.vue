@@ -3,8 +3,8 @@
         <div class="container">
             <div class="relative -mx-4 flex items-center justify-between">
                 <div class="w-60 max-w-full px-4 xl:mr-12">
-                    <router-link
-                        to="/"
+                    <Link
+                        href="/"
                         class="header-logo block w-full"
                         :class="logoClasses"
                     >
@@ -15,7 +15,7 @@
                             height="30"
                             class="w-full"
                         />
-                    </router-link>
+                </Link>
                 </div>
                 <div class="flex ps-5 w-full items-center justify-between px-4">
                     <div>

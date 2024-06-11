@@ -9,6 +9,7 @@ import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import api from '@/axios';
 import { reactive, ref } from 'vue';
+import {Inertia} from '@inertiajs/inertia';
 
 defineProps({
     canResetPassword: {
@@ -31,7 +32,8 @@ api.post('/login',form.value).then(({data})=>{
     error.value = data.error;
   }else{
     error.value = '';
-    window.location = '/'
+    // window.location = '/'
+    Inertia.visit('/');
   }
 
   console.log(data)
